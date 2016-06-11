@@ -1,0 +1,25 @@
+.base {
+  background-color: transparent;
+  color: #007aff;
+  font-size: 14px;
+
+  &:active {
+    color: #0063cc;
+  }
+
+  &:disabled {
+    color: #999;
+  }
+
+  &--chrome {
+    background-color: #fff;
+    border-radius: 10em;
+    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.07), 0 0.5px 0.5px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    padding: 5px 14px;
+
+    &:active {
+      background-color: #fafafa;
+    }
+  }
+}

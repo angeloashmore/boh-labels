@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BOH Labels</title>
+  </head>
+  <body>
+    <div id="react-root"></div>
+    <script>
+      const script = document.createElement('script')
+      script.src = (process.env.ENVIRONMENT === 'DEV') ?
+                   'http://localhost:8080/build/bundle.js' :
+                   './build/bundle.js'
+      document.write(script.outerHTML)
+    </script>
+  </body>
+</html>

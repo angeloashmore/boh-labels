@@ -1,0 +1,20 @@
+.base {
+  color: #000;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 14px;
+  padding: 15px;
+}
+
+.secondary {
+  background-color: #f2f2f2;
+  color: #7f7f7f;
+}
+
+.shadow {
+  box-shadow: inset 0 -0.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.slim {
+  padding: 10px 15px;
+}
