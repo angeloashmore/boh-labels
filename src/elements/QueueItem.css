@@ -1,0 +1,31 @@
+.base {
+  align-items: center;
+  width: 100%;
+
+  &:hover {
+    .accessories--right {
+      opacity: 1;
+    }
+  }
+
+  &--selected {
+    background-color: #007aff;
+    color: #fff;
+
+    .accessories--right {
+      opacity: 1;
+    }
+  }
+}
+
+.accessories {
+  &--left {
+    margin-right: 15px;
+  }
+
+  &--right {
+    margin-left: 15px;
+    opacity: 0;
+    transition: opacity .05s;
+  }
+}

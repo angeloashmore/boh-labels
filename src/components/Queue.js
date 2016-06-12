@@ -2,8 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import { QueueItem } from 'components'
-import { Container, Icon, ListDivider, TopBar } from 'elements'
+import { Container, Icon, ListDivider, QueueItem, TopBar } from 'elements'
 import { Button, Fieldset, Label, Select, TextField } from 'elements/form'
 
 import styles from 'components/Queue.css'
