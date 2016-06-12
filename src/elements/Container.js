@@ -7,9 +7,9 @@ import styles from 'elements/Container.css'
 const Container = ({
   children,
   className: overrideClassName,
-  secondary,
-  shadow,
-  slim
+  secondary = false,
+  shadow = true,
+  slim = false
 }) => {
   const className = cx(styles.base, {
     [styles.secondary]: secondary,
@@ -23,10 +23,6 @@ const Container = ({
       {children}
     </div>
   )
-}
-
-Container.defaultProps = {
-  shadow: true
 }
 
 export default CSSModules(Container, styles)

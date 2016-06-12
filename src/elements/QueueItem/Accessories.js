@@ -5,7 +5,7 @@ import cx from 'classnames'
 import styles from 'elements/QueueItem/Accessories.css'
 
 const Accessories = ({
-  accessories,
+  accessories = [],
   className: overrideClassName
 }) => {
   const className = cx(styles.base, {
@@ -28,10 +28,6 @@ const Accessories = ({
       {renderAccessories}
     </ul>
   )
-}
-
-Accessories.defaultProps = {
-  accessories: []
 }
 
 export default CSSModules(Accessories, styles)

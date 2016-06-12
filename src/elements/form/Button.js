@@ -4,12 +4,13 @@ import cx from 'classnames'
 
 import styles from 'elements/Form/Button.css'
 
-const Button = (props) => {
-  const {
-    className: overrideClassName,
-    chrome
-  } = props
-
+const Button = ({
+  className: overrideClassName,
+  chrome = true,
+  disabled = false,
+  onClick = () => {},
+  value
+}) => {
   const className = cx(styles.base, {
     [overrideClassName]: overrideClassName,
     [styles['base--chrome']]: chrome
@@ -17,15 +18,13 @@ const Button = (props) => {
 
   return (
     <input
-      {...props}
       className={className}
+      disabled={disabled}
+      onClick={onClick}
       type='button'
+      value={value}
     />
   )
-}
-
-Button.defaultProps = {
-  chrome: true
 }
 
 export default CSSModules(Button, styles)

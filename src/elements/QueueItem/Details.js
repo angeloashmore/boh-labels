@@ -6,7 +6,7 @@ import styles from 'elements/QueueItem/Details.css'
 
 const Accessories = ({
   className: overrideClassName,
-  metadata,
+  metadata = [],
   title
 }) => {
   const className = cx(styles.base, {
@@ -32,10 +32,6 @@ const Accessories = ({
       {renderMetadata}
     </div>
   )
-}
-
-Accessories.defaultProps = {
-  metadata: []
 }
 
 export default CSSModules(Accessories, styles)

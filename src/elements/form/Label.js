@@ -4,21 +4,16 @@ import cx from 'classnames'
 
 import styles from 'elements/Form/Label.css'
 
-const Label = (props) => {
-  const {
-    children,
-    className: overrideClassName
-  } = props
-
+const Label = ({
+  children,
+  className: overrideClassName
+}) => {
   const className = cx(styles.base, {
     [overrideClassName]: overrideClassName
   })
 
   return (
-    <label
-      {...props}
-      className={className}
-    >
+    <label className={className}>
       {children}
     </label>
   )

@@ -4,21 +4,22 @@ import cx from 'classnames'
 
 import styles from 'elements/Form/TextField.css'
 
-const TextField = (props) => {
-  const {
-    children,
-    className: overrideClassName
-  } = props
-
+const TextField = ({
+  children,
+  className: overrideClassName,
+  onChange = () => {},
+  value
+}) => {
   const className = cx(styles.base, {
     [overrideClassName]: overrideClassName
   })
 
   return (
     <input
-      {...props}
       className={className}
+      onChange={onChange}
       type='text'
+      value={value}
     />
   )
 }

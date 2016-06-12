@@ -7,8 +7,8 @@ import * as icons from 'assets/icons'
 
 const Icon = ({
   className: overrideClassName,
-  onClick,
-  selected,
+  onClick = () => {},
+  selected = false,
   type
 }) => {
   const className = cx(styles.base, {
@@ -28,10 +28,6 @@ const Icon = ({
       </div>
     </div>
   )
-}
-
-Icon.defaultProps = {
-  selected: false
 }
 
 export default CSSModules(Icon, styles)

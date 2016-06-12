@@ -8,12 +8,12 @@ import { Accessories, Details } from 'elements/QueueItem/index'
 import styles from 'elements/QueueItem.css'
 
 const QueueItem = ({
-  accessoriesLeft,
-  accessoriesRight,
+  accessoriesLeft = [],
+  accessoriesRight = [],
   className: overrideClassName,
-  selected,
+  selected = false,
   title,
-  metadata
+  metadata = []
 }) => {
   const className = cx(styles.base, {
     [styles['base--selected']]: selected,
@@ -40,12 +40,6 @@ const QueueItem = ({
       />
     </Container>
   )
-}
-
-QueueItem.defaultProps = {
-  accessoriesLeft: [],
-  accessoriesRight: [],
-  metadata: []
 }
 
 export default CSSModules(QueueItem, styles)

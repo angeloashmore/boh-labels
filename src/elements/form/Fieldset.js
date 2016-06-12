@@ -4,21 +4,16 @@ import cx from 'classnames'
 
 import styles from 'elements/Form/Fieldset.css'
 
-const Fieldset = (props) => {
-  const {
-    children,
-    className: overrideClassName
-  } = props
-
+const Fieldset = ({
+  children,
+  className: overrideClassName
+}) => {
   const className = cx(styles.base, {
     [overrideClassName]: overrideClassName
   })
 
   return (
-    <div
-      {...props}
-      className={className}
-    >
+    <div className={className}>
       {children}
     </div>
   )
