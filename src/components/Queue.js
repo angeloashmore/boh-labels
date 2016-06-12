@@ -26,14 +26,15 @@ const Queue = ({
     />
   ]
 
-  const accessoriesLeft = (quantity = 1) => [
+  const accessoriesLeft = (id, quantity = 1) => [
     <TextField
       className={styles['accessories-left-quantity']}
       value={quantity}
+      onChange={({ target }) => queueActions.updateQuantity({ id, quantity: target.value })}
     />
   ]
 
-  const queueSize = items.reduce((a, b) => (a + b), 0)
+  const queueSize = items.reduce((a, b) => (a + b : 0), 0)
 
   return (
     <div className={className}>
@@ -60,7 +61,7 @@ const Queue = ({
           return (
             <QueueItem
               key={id}
-              accessoriesLeft={accessoriesLeft(quantity)}
+              accessoriesLeft={accessoriesLeft(id, quantity)}
               accessoriesRight={accessoriesRight(id)}
               metadata={label.metadata}
               title={label.title}

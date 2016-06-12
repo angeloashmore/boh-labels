@@ -22,5 +22,21 @@ export default handleActions({
 
   [types.QUEUE.REMOVE_LABEL]: ({ items }, { payload: id }) => ({
     items: items.delete(id)
-  })
+  }),
+
+  [types.QUEUE.UPDATE_QUANTITY]: ({ items }, { payload }) => {
+    const quantity = Number.parseInt(payload.quantity)
+
+    let modifiedItems
+
+    if (quantity > 0) {
+      modifiedItems = items.set(payload.id, quantity)
+    } else {
+      modifiedItems = items.delete(payload.id)
+    }
+
+    return {
+      items: modifiedItems
+    }
+  }
 }, initialState)
