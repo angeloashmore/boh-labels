@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import { Icon, ListDivider, QueueItem, TopBar } from 'elements'
+import { Icon, ListDivider, QueueItem, TopBar } from 'components'
 
 import styles from 'components/MasterList.css'
 

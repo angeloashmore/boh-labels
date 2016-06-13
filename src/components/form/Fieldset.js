@@ -2,11 +2,11 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import styles from 'elements/ListDivider.css'
+import styles from 'components/form/Fieldset.css'
 
-const ListDivider = ({
-  className: overrideClassName,
-  value
+const Fieldset = ({
+  children,
+  className: overrideClassName
 }) => {
   const className = cx(styles.base, {
     [overrideClassName]: overrideClassName
@@ -14,9 +14,9 @@ const ListDivider = ({
 
   return (
     <div className={className}>
-      {value}
+      {children}
     </div>
   )
 }
 
-export default CSSModules(ListDivider, styles)
+export default CSSModules(Fieldset, styles)

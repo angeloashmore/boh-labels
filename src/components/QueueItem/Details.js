@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import styles from 'elements/QueueItem/Details.css'
+import styles from 'components/QueueItem/Details.css'
 
 const Accessories = ({
   className: overrideClassName,

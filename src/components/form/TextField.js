@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import styles from 'elements/Form/TextField.css'
+import styles from 'components/form/TextField.css'
 
 const TextField = ({
   children,

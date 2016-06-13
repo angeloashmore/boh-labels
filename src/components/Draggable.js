@@ -2,19 +2,13 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import styles from 'elements/Container.css'
+import styles from 'components/Draggable.css'
 
-const Container = ({
+const Draggable = ({
   children,
-  className: overrideClassName,
-  secondary = false,
-  shadow = true,
-  slim = false
+  className: overrideClassName
 }) => {
   const className = cx(styles.base, {
-    [styles.secondary]: secondary,
-    [styles.shadow]: shadow,
-    [styles.slim]: slim,
     [overrideClassName]: overrideClassName
   })
 
@@ -25,4 +19,4 @@ const Container = ({
   )
 }
 
-export default CSSModules(Container, styles)
+export default CSSModules(Draggable, styles)

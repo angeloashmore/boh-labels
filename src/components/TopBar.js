@@ -2,9 +2,9 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import { Container, Draggable } from 'elements'
+import { Container, Draggable } from 'components'
 
-import styles from 'elements/TopBar.css'
+import styles from 'components/TopBar.css'
 
 const TopBar = ({
   children,

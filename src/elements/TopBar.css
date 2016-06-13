@@ -1,6 +1,0 @@
-.base {
-  composes: base from "elements/Container.css";
-  composes: secondary from "elements/Container.css";
-  align-items: center;
-  height: 3.5rem;
-}

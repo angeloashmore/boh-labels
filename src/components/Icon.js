@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import styles from 'elements/Icon.css'
+import styles from 'components/Icon.css'
 import * as icons from 'assets/icons'
 
 const Icon = ({

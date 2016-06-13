@@ -8,7 +8,7 @@ import 'app-reset'
 import routes from 'routes'
 import configureStore from 'store/configureStore'
 
-import 'App.css'
+import 'app.css'
 
 const store = configureStore()
 const history = syncHistoryWithStore(hashHistory, store)

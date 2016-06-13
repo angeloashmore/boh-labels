@@ -2,10 +2,10 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import styles from 'elements/QueueItem/Accessories.css'
+import styles from 'components/QueueItem/Accessories.css'
 
 const Accessories = ({
-  accessories = [],
+  accessories,
   className: overrideClassName
 }) => {
   const className = cx(styles.base, {
@@ -28,6 +28,10 @@ const Accessories = ({
       {renderAccessories}
     </ul>
   )
+}
+
+Accessories.defaultProps = {
+  accessories: []
 }
 
 export default CSSModules(Accessories, styles)

@@ -2,9 +2,9 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import styles from 'elements/Draggable.css'
+import styles from 'components/form/Select.css'
 
-const Draggable = ({
+const Select = ({
   children,
   className: overrideClassName
 }) => {
@@ -13,10 +13,10 @@ const Draggable = ({
   })
 
   return (
-    <div className={className}>
+    <select className={className}>
       {children}
-    </div>
+    </select>
   )
 }
 
-export default CSSModules(Draggable, styles)
+export default CSSModules(Select, styles)

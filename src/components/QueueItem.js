@@ -2,10 +2,10 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import { Container } from 'elements'
-import { Accessories, Details } from 'elements/QueueItem/index'
+import { Container } from 'components'
+import { Accessories, Details } from 'components/QueueItem/index'
 
-import styles from 'elements/QueueItem.css'
+import styles from 'components/QueueItem.css'
 
 const QueueItem = ({
   accessoriesLeft = [],
