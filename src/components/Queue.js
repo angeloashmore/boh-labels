@@ -19,28 +19,31 @@ const Queue = ({
 
   const accessoriesRight = (id, selected) => [
     <Icon
-      onClick={() => queueActions.removeLabel(id)}
+      onClick={() => queueActions.remove(id)}
       selected={selected}
       type='remove'
     />
   ]
 
-  const accessoriesLeft = (id, quantity = 1) => [
+  const accessoriesLeft = (id, quantity) => [
     <TextField
       className={styles['accessories-left-quantity']}
       value={quantity}
-      onChange={({ target }) => queueActions.updateQuantity({ id, quantity: target.value })}
+      onChange={({ target }) => {
+          queueActions.changeQuantity({ id, quantity: target.value })
+        }}
     />
   ]
 
-  const queueSize = items.reduce((a, b) => (a + b : 0), 0)
+  const queueSize = items.reduce((a, b) => (a + b), 0)
+  const disabled = !(queueSize > 0)
 
   return (
     <div className={className}>
       <TopBar styleName='top-bar'>
         <span>{queueSize} label{queueSize === 1 ? '' : 's'}</span>
         <Button
-          disabled={queueSize > 0 ? '' : 'disabled'}
+          disabled={disabled}
           value="Print"
         />
       </TopBar>
@@ -56,14 +59,14 @@ const Queue = ({
       </Container>
       <Container styleName='list'>
         {items.map((quantity, id) => {
-          const label = labels.items.get(id)
+          const { metadata, title } = labels.items.get(id)
           return (
             <QueueItem
               key={id}
               accessoriesLeft={accessoriesLeft(id, quantity)}
               accessoriesRight={accessoriesRight(id)}
-              metadata={label.metadata}
-              title={label.title}
+              metadata={metadata}
+              title={title}
             />
           )
         })}
@@ -71,8 +74,8 @@ const Queue = ({
       <Container slim={true} styleName='clearAll'>
         <Button
           chrome={false}
-          disabled={queueSize > 0 ? '' : 'disabled'}
-          onClick={() => queueActions.removeAllLabels()}
+          disabled={disabled}
+          onClick={() => queueActions.removeAll()}
           value="Clear All"
         />
       </Container>

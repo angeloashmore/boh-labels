@@ -23,8 +23,8 @@ export default class App extends Component {
   componentDidMount() {
     const { collectionActions, labelActions } = this.props
 
-    collectionActions.getCollections()
-    labelActions.getLabels()
+    collectionActions.load()
+    labelActions.load()
   }
 
   render() {

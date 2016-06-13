@@ -5,9 +5,9 @@ import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
 import { App } from 'components'
-import * as collectionActions from 'actions/collectionActions'
-import * as labelActions from 'actions/labelActions'
-import * as queueActions from 'actions/queueActions'
+import * as collectionActions from 'ducks/collections'
+import * as labelActions from 'ducks/labels'
+import * as queueActions from 'ducks/queue'
 
 const mapStateToProps = (state, ownProps) => ({
   collections: state.collections,

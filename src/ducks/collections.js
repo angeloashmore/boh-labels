@@ -1,7 +1,8 @@
 import typeToReducer from 'type-to-reducer'
+import { createAction } from 'redux-actions'
 import Immutable from 'immutable'
 
-import * as types from 'actions/actionTypes'
+const LOAD = 'boh-labels/collections/LOAD'
 
 const initialState = {
   error: null,
@@ -11,7 +12,7 @@ const initialState = {
 }
 
 export default typeToReducer({
-  [types.COLLECTIONS.GET_COLLECTIONS]: {
+  [LOAD]: {
     PENDING: (state) => ({
       ...initialState,
       isPending: true
@@ -30,3 +31,30 @@ export default typeToReducer({
     })
   }
 }, initialState)
+
+export const load = createAction(LOAD, async () => {
+  const result = await Promise.resolve([
+    {
+      id: 1,
+      title: 'MacBook',
+      label_ids: [1, 2, 3]
+    },
+    {
+      id: 2,
+      title: 'MacBook Air',
+      label_ids: [4, 5, 6]
+    },
+    {
+      id: 3,
+      title: 'MacBook Pro',
+      label_ids: [7]
+    },
+    {
+      id: 4,
+      title: 'MacBook Pro with Retina Display',
+      label_ids: [8]
+    }
+  ])
+
+  return result
+})

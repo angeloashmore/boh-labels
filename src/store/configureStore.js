@@ -5,7 +5,7 @@ import promiseMiddleware from 'redux-promise-middleware'
 import { hashHistory } from 'react-router'
 import { routerMiddleware } from 'react-router-redux'
 
-import rootReducer from 'reducers'
+import rootReducer from 'ducks'
 
 const logger = createLogger()
 

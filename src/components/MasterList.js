@@ -16,30 +16,24 @@ const MasterList = ({
     [overrideClassName]: overrideClassName
   })
 
-  const accessoriesLeftLabel = (selected) => [
+  const accessoriesLeft = (type, selected = false) => [
     <Icon
       className={styles['accessories-left-icon']}
       selected={selected}
-      type='label'
+      type={type}
     />
   ]
 
-  const accessoriesLeftCollection = (selected) => [
+  const accessoriesRight = (ids, selected = false) => [
     <Icon
-      className={styles['accessories-left-icon']}
+      type='info'
       selected={selected}
-      type='collection'
+    />,
+    <Icon
+      type='add'
+      selected={selected}
+      onClick={() => queueActions.addMultiple(ids)}
     />
-  ]
-
-  const accessoriesRightLabel = (id, selected) => [
-    <Icon type='info' selected={selected} />,
-    <Icon type='add' selected={selected} onClick={() => queueActions.addLabel(id)} />
-  ]
-
-  const accessoriesRightCollection = (ids, selected) => [
-    <Icon type='info' selected={selected} />,
-    <Icon type='add' selected={selected} onClick={() => queueActions.addLabels(ids)} />
   ]
 
   return (
@@ -49,23 +43,23 @@ const MasterList = ({
         <input type='text' styleName='search' />
       </TopBar>
       <div styleName='list'>
-        {labels.items.map((item) => (
+        {labels.items.map(({ id, metadata, title }) => (
           <QueueItem
-            key={item.id}
-            accessoriesLeft={accessoriesLeftLabel()}
-            accessoriesRight={accessoriesRightLabel(item.id)}
-            metadata={item.metadata}
-            title={item.title}
+            key={id}
+            accessoriesLeft={accessoriesLeft('label')}
+            accessoriesRight={accessoriesRight([id])}
+            metadata={metadata}
+            title={title}
           />
         ))}
         <ListDivider value="Collections" />
-        {collections.items.map((item) => (
+        {collections.items.map(({ id, label_ids = [], title }) => (
           <QueueItem
-            key={item.id}
-            accessoriesLeft={accessoriesLeftCollection()}
-            accessoriesRight={accessoriesRightCollection(item.label_ids)}
-            metadata={[`${item.label_ids.length} label${item.label_ids.length === 1 ? '' : 's'}`]}
-            title={item.title}
+            key={id}
+            accessoriesLeft={accessoriesLeft('collection')}
+            accessoriesRight={accessoriesRight(label_ids)}
+            metadata={[`${label_ids.length} label${label_ids.length === 1 ? '' : 's'}`]}
+            title={title}
           />
         ))}
       </div>
