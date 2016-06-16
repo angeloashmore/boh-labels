@@ -6,7 +6,7 @@ import styles from 'components/ListDivider.css'
 
 const ListDivider = ({
   className: overrideClassName,
-  value
+  title
 }) => {
   const className = cx(styles.base, {
     [overrideClassName]: overrideClassName
@@ -14,7 +14,7 @@ const ListDivider = ({
 
   return (
     <div className={className}>
-      {value}
+      {title}
     </div>
   )
 }

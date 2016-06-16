@@ -10,15 +10,22 @@ import styles from 'components/QueueItem.css'
 const QueueItem = ({
   accessoriesLeft = [],
   accessoriesRight = [],
+  category,
   className: overrideClassName,
   selected = false,
   title,
-  metadata = []
+  metadata = {}
 }) => {
   const className = cx(styles.base, {
     [styles['base--selected']]: selected,
     [overrideClassName]: overrideClassName
   })
+
+  const flatMetadata = Object.values(metadata)
+
+  if (category) {
+    flatMetadata.unshift(category)
+  }
 
   return (
     <Container
@@ -32,7 +39,7 @@ const QueueItem = ({
       />
       <Details
         title={title}
-        metadata={metadata}
+        metadata={flatMetadata}
       />
       <Accessories
         accessories={accessoriesRight}

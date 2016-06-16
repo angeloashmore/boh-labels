@@ -8,7 +8,7 @@ const initialState = {
   error: null,
   isPending: false,
   isRejected: false,
-  items: Immutable.Map()
+  items: Immutable.OrderedMap()
 }
 
 export default typeToReducer({
@@ -20,7 +20,7 @@ export default typeToReducer({
 
     FULFILLED: (state, action) => ({
       ...initialState,
-      items: Immutable.Map(action.payload.map((item) => [item.id, item]))
+      items: Immutable.OrderedMap(action.payload.map((item) => [item.id, item]))
     }),
 
     REJECTED: (state, action) => ({
@@ -33,48 +33,14 @@ export default typeToReducer({
 }, initialState)
 
 export const load = createAction(LOAD, async () => {
-  const result = await Promise.resolve([
-    {
-      id: 1,
-      metadata: ['MacBook', '1.1GHz', '4GB', '128GB'],
-      title: 'MJY32LL/A'
-    },
-    {
-      id: 2,
-      metadata: ['MacBook', '1.1GHz', '4GB', '128GB'],
-      title: 'MJY32LL/A'
-    },
-    {
-      id: 3,
-      metadata: ['MacBook', '1.1GHz', '4GB', '128GB'],
-      title: 'MJY32LL/A'
-    },
-    {
-      id: 4,
-      metadata: ['MacBook', '1.1GHz', '4GB', '128GB'],
-      title: 'MJY32LL/A'
-    },
-    {
-      id: 5,
-      metadata: ['MacBook', '1.1GHz', '4GB', '128GB'],
-      title: 'MJY32LL/A'
-    },
-    {
-      id: 6,
-      metadata: ['MacBook', '1.1GHz', '4GB', '128GB'],
-      title: 'MJY32LL/A'
-    },
-    {
-      id: 7,
-      metadata: ['MacBook', '1.1GHz', '4GB', '128GB'],
-      title: 'MJY32LL/A'
-    },
-    {
-      id: 8,
-      metadata: ['MacBook', '1.1GHz', '4GB', '128GB'],
-      title: 'MJY32LL/A'
-    }
-  ])
+  const releasesURL = 'https://api.github.com/repos/angeloashmore/boh-labels-db/releases/latest'
+  const releasesData = await fetch(releasesURL)
+  const releases = await releasesData.json()
 
-  return result
+  const asset = releases.assets.find((asset) => asset.name === 'labels.json')
+
+  const result = await fetch(asset.browser_download_url)
+  const json = await result.json()
+
+  return json
 })

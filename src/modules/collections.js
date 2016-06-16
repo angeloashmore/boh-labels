@@ -33,28 +33,14 @@ export default typeToReducer({
 }, initialState)
 
 export const load = createAction(LOAD, async () => {
-  const result = await Promise.resolve([
-    {
-      id: 1,
-      title: 'MacBook',
-      label_ids: [1, 2, 3]
-    },
-    {
-      id: 2,
-      title: 'MacBook Air',
-      label_ids: [4, 5, 6]
-    },
-    {
-      id: 3,
-      title: 'MacBook Pro',
-      label_ids: [7]
-    },
-    {
-      id: 4,
-      title: 'MacBook Pro with Retina Display',
-      label_ids: [8]
-    }
-  ])
+  const releasesURL = 'https://api.github.com/repos/angeloashmore/boh-labels-db/releases/latest'
+  const releasesData = await fetch(releasesURL)
+  const releases = await releasesData.json()
 
-  return result
+  const asset = releases.assets.find((asset) => asset.name === 'collections.json')
+
+  const result = await fetch(asset.browser_download_url)
+  const json = await result.json()
+
+  return json
 })

@@ -26,13 +26,13 @@ const MasterList = ({
 
   const accessoriesRight = (ids, selected = false) => [
     <Icon
-      type='info'
       selected={selected}
+      type='info'
     />,
     <Icon
-      type='add'
-      selected={selected}
       onClick={() => queueActions.addMultiple(ids)}
+      selected={selected}
+      type='add'
     />
   ]
 
@@ -43,25 +43,31 @@ const MasterList = ({
         <input type='text' styleName='search' />
       </TopBar>
       <div styleName='list'>
-        {labels.items.map(({ id, metadata, title }) => (
-          <QueueItem
-            key={id}
-            accessoriesLeft={accessoriesLeft('label')}
-            accessoriesRight={accessoriesRight([id])}
-            metadata={metadata}
-            title={title}
-          />
-        ))}
-        <ListDivider value="Collections" />
-        {collections.items.map(({ id, label_ids = [], title }) => (
-          <QueueItem
-            key={id}
-            accessoriesLeft={accessoriesLeft('collection')}
-            accessoriesRight={accessoriesRight(label_ids)}
-            metadata={[`${label_ids.length} label${label_ids.length === 1 ? '' : 's'}`]}
-            title={title}
-          />
-        ))}
+        {labels.isPending ?
+         'Loading' :
+         labels.items.map(({ category, id, key, metadata }) => (
+           <QueueItem
+             key={id}
+             accessoriesLeft={accessoriesLeft('label')}
+             accessoriesRight={accessoriesRight([id])}
+             category={category}
+             metadata={metadata}
+             title={key}
+           />
+         ))
+        }
+        <ListDivider title="Collections" />
+        {collections.isPending ?
+         'Loading' :
+         collections.items.map(({ id, key, label_ids = [] }) => (
+           <QueueItem
+             key={id}
+             accessoriesLeft={accessoriesLeft('collection')}
+             accessoriesRight={accessoriesRight(label_ids)}
+             metadata={[`${label_ids.length} label${label_ids.length === 1 ? '' : 's'}`]}
+             title={key}
+           />
+         ))}
       </div>
     </div>
   )

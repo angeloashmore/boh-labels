@@ -8,6 +8,10 @@ import 'app-reset'
 import routes from 'routes'
 import configureStore from 'store/configureStore'
 
+// Load fetch() to environment
+import 'whatwg-fetch'
+
+// Load global CSS
 import 'app.css'
 
 const store = configureStore()

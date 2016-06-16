@@ -34,6 +34,11 @@ module.exports = {
         }
       },
       {
+        test: /\.json/,
+        loader: 'json',
+        exclude: /node_modules/
+      },
+      {
         test: /\.css$/,
         loaders: [
           'style?' + JSON.stringify({
@@ -56,6 +61,8 @@ module.exports = {
       }
     ]
   },
+
+  target: 'electron',
 
   postcss: () => [
     postcssNested,

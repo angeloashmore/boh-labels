@@ -59,14 +59,15 @@ const Queue = ({
       </Container>
       <Container styleName='list'>
         {items.map((quantity, id) => {
-          const { metadata, title } = labels.items.get(id)
+          const { category, key, metadata } = labels.items.get(id)
           return (
             <QueueItem
-              key={id}
+              category={category}
               accessoriesLeft={accessoriesLeft(id, quantity)}
               accessoriesRight={accessoriesRight(id)}
+              key={id}
               metadata={metadata}
-              title={title}
+              title={key}
             />
           )
         })}
