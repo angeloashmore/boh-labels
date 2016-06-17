@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
+import Spinner from 'react-spin'
 
 import { Icon, ListDivider, QueueItem, TopBar } from 'components'
 
@@ -36,39 +37,56 @@ const MasterList = ({
     />
   ]
 
+  const topBar = (
+    <TopBar styleName='top-bar'>
+      <Icon type='search' styleName='search-icon' />
+      <input type='text' styleName='search' />
+    </TopBar>
+  )
+
+  const labelsList = (
+    labels.items.map(({ category, id, key, metadata }) => (
+      <QueueItem
+        key={id}
+        accessoriesLeft={accessoriesLeft('label')}
+        accessoriesRight={accessoriesRight([id])}
+        category={category}
+        metadata={metadata}
+        title={key}
+      />
+    ))
+  )
+
+  const collectionsList = (
+    collections.items.map(({ id, key, label_ids = [] }) => (
+      <QueueItem
+        key={id}
+        accessoriesLeft={accessoriesLeft('collection')}
+        accessoriesRight={accessoriesRight(label_ids)}
+        metadata={[`${label_ids.length} label${label_ids.length === 1 ? '' : 's'}`]}
+        title={key}
+      />
+    ))
+  )
+
+  const renderList = (
+    <div styleName='list'>
+      {labelsList}
+      <ListDivider title="Collections" />
+      {collectionsList}
+    </div>
+  )
+
+  const renderLoading = (
+    <div styleName='loading'>
+      Loading
+    </div>
+  )
+
   return (
     <div className={className}>
-      <TopBar styleName='top-bar'>
-        <Icon type='search' styleName='search-icon' />
-        <input type='text' styleName='search' />
-      </TopBar>
-      <div styleName='list'>
-        {labels.isPending ?
-         'Loading' :
-         labels.items.map(({ category, id, key, metadata }) => (
-           <QueueItem
-             key={id}
-             accessoriesLeft={accessoriesLeft('label')}
-             accessoriesRight={accessoriesRight([id])}
-             category={category}
-             metadata={metadata}
-             title={key}
-           />
-         ))
-        }
-        <ListDivider title="Collections" />
-        {collections.isPending ?
-         'Loading' :
-         collections.items.map(({ id, key, label_ids = [] }) => (
-           <QueueItem
-             key={id}
-             accessoriesLeft={accessoriesLeft('collection')}
-             accessoriesRight={accessoriesRight(label_ids)}
-             metadata={[`${label_ids.length} label${label_ids.length === 1 ? '' : 's'}`]}
-             title={key}
-           />
-         ))}
-      </div>
+      {topBar}
+      {labels.isPending || labels.isPending ? renderLoading : renderList}
     </div>
   )
 }
