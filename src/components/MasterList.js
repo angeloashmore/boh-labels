@@ -1,7 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
-import Spinner from 'react-spin'
 
 import { Icon, ListDivider, QueueItem, TopBar } from 'components'
 
