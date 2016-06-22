@@ -10,6 +10,8 @@ export default class App extends Component {
   static propTypes = {
     collectionActions: PropTypes.object.isRequired,
     collections: PropTypes.object.isRequired,
+    filters: PropTypes.object.isRequred,
+    filterActions: PropTypes.object.isRequired,
     labelActions: PropTypes.object.isRequired,
     labels: PropTypes.object.isRequired,
     queue: PropTypes.object.isRequired,
@@ -31,6 +33,8 @@ export default class App extends Component {
     const {
       className: overrideClassName,
       collections,
+      filters,
+      filterActions,
       labels,
       queue,
       queueActions
@@ -44,6 +48,8 @@ export default class App extends Component {
       <div className={className}>
         <MasterList
           collections={collections}
+          filters={filters}
+          filterActions={filterActions}
           labels={labels}
           queueActions={queueActions}
           styleName='master-list'

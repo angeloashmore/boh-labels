@@ -11,6 +11,8 @@ const MasterList = ({
   queueActions,
   className: overrideClassName,
   collections,
+  filters,
+  filterActions,
   labels
 }) => {
   const className = cx(styles.base, {
@@ -40,12 +42,24 @@ const MasterList = ({
   const topBar = (
     <TopBar styleName='top-bar'>
       <Icon type='search' styleName='search-icon' />
-      <input type='text' styleName='search' />
+      <input
+        onChange={({ target }) => filterActions.setQuery(target.value)}
+        styleName='search'
+        type='text'
+      />
     </TopBar>
   )
 
-  const labelsList = (
-    labels.items.map(({ category, id, key, metadata }) => (
+  const labelsList = () => {
+    const { query } = filters
+
+    const filteredItems = labels.items.filter((item) => {
+      const subject = JSON.stringify(item)
+      const regExp = new RegExp(query.trim().replace(' ', '.*'), 'gi')
+      return subject.match(regExp)
+    })
+
+    return filteredItems.map(({ category, id, key, metadata }) => (
       <QueueItem
         key={id}
         accessoriesLeft={accessoriesLeft('label')}
@@ -55,10 +69,18 @@ const MasterList = ({
         title={key}
       />
     ))
-  )
+  }
 
-  const collectionsList = (
-    collections.items.map(({ id, key, label_ids = [] }) => (
+  const collectionsList = () => {
+    const { query } = filters
+
+    const filteredItems = collections.items.filter((item) => {
+      const subject = JSON.stringify(item)
+      const regExp = new RegExp(query.trim().replace(' ', '.*'), 'gi')
+      return subject.match(regExp)
+    })
+
+    return filteredItems.map(({ id, key, label_ids = [] }) => (
       <QueueItem
         key={id}
         accessoriesLeft={accessoriesLeft('collection')}
@@ -67,13 +89,13 @@ const MasterList = ({
         title={key}
       />
     ))
-  )
+  }
 
   const renderList = (
     <div styleName='list'>
-      {labelsList}
+      {labelsList()}
       <ListDivider title="Collections" />
-      {collectionsList}
+      {collectionsList()}
     </div>
   )
 
