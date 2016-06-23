@@ -12,7 +12,7 @@ export default typeToReducer({
   [CLEAR_QUERY]: () => (initialState),
 
   [SET_QUERY]: (action, { payload }) => ({
-    query: payload
+    query: payload.trim()
   })
 }, initialState)
 

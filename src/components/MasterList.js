@@ -2,6 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
+import fuzzySearch from 'lib/fuzzySearch'
 import { Icon, ListDivider, QueueItem, TopBar } from 'components'
 
 import styles from 'components/MasterList.css'
@@ -52,11 +53,11 @@ const MasterList = ({
   const labelsList = () => {
     const { query } = filters
 
-    const filteredItems = labels.items.filter((item) => {
-      const subject = JSON.stringify(item)
-      const regExp = new RegExp(query.trim().replace(' ', '.*'), 'gi')
-      return subject.match(regExp)
-    })
+    let filteredItems = labels.items
+
+    if (query.trim().length > 0) {
+      filteredItems = filteredItems.filter((item) => fuzzySearch(item, query))
+    }
 
     return filteredItems.map(({ category, id, key, metadata }) => (
       <QueueItem
@@ -73,11 +74,11 @@ const MasterList = ({
   const collectionsList = () => {
     const { query } = filters
 
-    const filteredItems = collections.items.filter((item) => {
-      const subject = JSON.stringify(item)
-      const regExp = new RegExp(query.trim().replace(' ', '.*'), 'gi')
-      return subject.match(regExp)
-    })
+    let filteredItems = collections.items
+
+    if (query.trim().length > 0) {
+      filteredItems = filteredItems.filter((item) => fuzzySearch(item, query))
+    }
 
     return filteredItems.map(({ id, key, label_ids = [] }) => (
       <QueueItem
