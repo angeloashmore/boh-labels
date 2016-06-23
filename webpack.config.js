@@ -62,7 +62,7 @@ module.exports = {
     ]
   },
 
-  target: 'electron',
+  target: 'electron-renderer',
 
   postcss: () => [
     postcssNested,

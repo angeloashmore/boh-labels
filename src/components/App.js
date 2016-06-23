@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import { MasterList, Queue } from 'components'
+import { MasterList, PrintSheet, Queue } from 'components'
 
 import styles from 'components/App.css'
 
@@ -12,8 +12,10 @@ export default class App extends Component {
     collections: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequred,
     filterActions: PropTypes.object.isRequired,
-    labelActions: PropTypes.object.isRequired,
     labels: PropTypes.object.isRequired,
+    labelActions: PropTypes.object.isRequired,
+    printOptions: PropTypes.object.isRequred,
+    printOptionsActions: PropTypes.object.isRequred,
     queue: PropTypes.object.isRequired,
     queueActions: PropTypes.object.isRequired
   }
@@ -36,6 +38,8 @@ export default class App extends Component {
       filters,
       filterActions,
       labels,
+      printOptions,
+      printOptionsActions,
       queue,
       queueActions
     } = this.props
@@ -57,8 +61,16 @@ export default class App extends Component {
         <Queue
           items={queue}
           labels={labels}
+          printOptions={printOptions}
+          printOptionsActions={printOptionsActions}
           queueActions={queueActions}
           styleName='queue'
+        />
+        <PrintSheet
+          labels={labels}
+          printOptions={printOptions}
+          queue={queue}
+          styleName='print-sheet'
         />
       </div>
     )

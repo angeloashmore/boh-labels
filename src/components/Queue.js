@@ -11,6 +11,8 @@ const Queue = ({
   className: overrideClassName,
   labels,
   items,
+  printOptions,
+  printOptionsActions,
   queueActions
 }) => {
   const className = cx(styles.base, {
@@ -44,16 +46,20 @@ const Queue = ({
         <span>{queueSize} label{queueSize === 1 ? '' : 's'}</span>
         <Button
           disabled={disabled}
+          onClick={() => window.print()}
           value="Print"
         />
       </TopBar>
       <Container slim={true}>
         <Fieldset>
           <Label>Template:</Label>
-          <Select>
-            <option>Master Pack</option>
-            <option>Physical Inventory</option>
-            <option>Shelf</option>
+          <Select
+            onChange={({ target }) => printOptionsActions.setTemplate(target.value)}
+            value={printOptions.template}
+          >
+            <option value='master_pack'>Master Pack</option>
+            <option value='physical_inventory'>Physical Inventory</option>
+            <option value='shelf'>Shelf</option>
           </Select>
         </Fieldset>
       </Container>

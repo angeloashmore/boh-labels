@@ -6,14 +6,20 @@ import styles from 'components/form/Select.css'
 
 const Select = ({
   children,
-  className: overrideClassName
+  className: overrideClassName,
+  onChange = () => {},
+  value
 }) => {
   const className = cx(styles.base, {
     [overrideClassName]: overrideClassName
   })
 
   return (
-    <select className={className}>
+    <select
+      className={className}
+      onChange={onChange}
+      value={value}
+    >
       {children}
     </select>
   )

@@ -8,12 +8,14 @@ import { App } from 'components'
 import * as collectionActions from 'modules/collections'
 import * as filterActions from 'modules/filters'
 import * as labelActions from 'modules/labels'
+import * as printOptionsActions from 'modules/printOptions'
 import * as queueActions from 'modules/queue'
 
 const mapStateToProps = (state, ownProps) => ({
   collections: state.collections,
   filters: state.filters,
   labels: state.labels,
+  printOptions: state.printOptions,
   queue: state.queue.items
 })
 
@@ -21,6 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
   collectionActions: bindActionCreators(collectionActions, dispatch),
   filterActions: bindActionCreators(filterActions, dispatch),
   labelActions: bindActionCreators(labelActions, dispatch),
+  printOptionsActions: bindActionCreators(printOptionsActions, dispatch),
   queueActions: bindActionCreators(queueActions, dispatch)
 })
 
