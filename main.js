@@ -16,7 +16,10 @@ function createWindows () {
     height: 750,
     minHeight: 750,
     minWidth: 600,
-    width: 600
+    width: 600,
+    webPreferences: {
+      scrollBounce: true
+    }
   })
 
   // and load the index.html of the app.
