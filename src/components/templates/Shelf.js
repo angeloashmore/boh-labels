@@ -1,3 +1,4 @@
+import Electron from 'electron'
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
@@ -5,6 +6,8 @@ import Immutable from 'immutable'
 import Barcode from 'react-barcode'
 
 import styles from 'components/templates/Shelf.css'
+
+const { BrowserWindow } = Electron.remote
 
 const Shelf = ({
   className: overrideClassName,
@@ -56,7 +59,6 @@ const Shelf = ({
               height={34}
               margin={0}
               textMargin={0}
-              textPosition='top'
               value={label.upc.toString()}
               width={1}
             />
@@ -71,6 +73,15 @@ const Shelf = ({
       {queue.map(renderLabel)}
     </ul>
   )
+}
+
+Shelf.handlePrint = () => {
+  const focusedWindow = BrowserWindow.getFocusedWindow()
+  const { webContents } = focusedWindow
+
+  webContents.print({
+    printBackground: true
+  })
 }
 
 export default CSSModules(Shelf, styles)

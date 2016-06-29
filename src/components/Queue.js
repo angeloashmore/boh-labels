@@ -5,6 +5,7 @@ import cx from 'classnames'
 
 import { Container, Icon, ListDivider, QueueItem, TopBar } from 'components'
 import { Button, Fieldset, Label, Select, TextField } from 'components/form'
+import * as templates from 'components/templates'
 
 import styles from 'components/Queue.css'
 
@@ -43,14 +44,7 @@ const Queue = ({
   const queueSize = items.reduce((a, b) => (a + b), 0)
   const disabled = !(queueSize > 0)
 
-  const handlePrint = () => {
-    const focusedWindow = BrowserWindow.getFocusedWindow()
-    const { webContents } = focusedWindow
-
-    webContents.print({
-      printBackground: true
-    })
-  }
+  const { handlePrint } = templates[printOptions.template]
 
   return (
     <div className={className}>

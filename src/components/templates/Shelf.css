@@ -107,7 +107,7 @@
       top: 34px;
       width: 76px;
 
-      > svg {
+      & > svg {
         height: 100%;
         width: 100%;
       }

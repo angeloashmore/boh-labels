@@ -1,0 +1,99 @@
+.base {
+  font-family: 'Myriad Set Pro';
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.label {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  height: 4in;
+  padding: 0.125in;
+  width: 2.125in;
+
+  &__stamp {
+    align-items: center;
+    background-color: #000;
+    border-radius: 0.05in;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    height: 1.875in;
+    justify-content: space-between;
+    padding: 0.125in;
+
+    &__category,
+    &__part-number {
+      font-size: 20px;
+    }
+
+    &__identifier {
+      font-size: 80px;
+    }
+  }
+
+  &__metadata {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &__item {
+      margin-bottom: 0.0625in;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &__key {
+        display: block;
+        font-size: 12px;
+      }
+
+      &__value {
+        display: block;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+
+    &__date {
+      align-items: center;
+      background-color: #000;
+      border-radius: 0.05in;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+      height: 0.33in;
+      justify-content: center;
+      margin-right: 0.125in;
+      width: 0.33in;
+
+      &__month {
+        font-size: 10px;
+      }
+
+      &__date {
+        font-size: 14px;
+      }
+    }
+
+    &__barcode {
+      flex-grow: 1;
+      height: 18px;
+
+      & > svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}

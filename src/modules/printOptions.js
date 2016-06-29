@@ -4,7 +4,7 @@ import { createAction } from 'redux-actions'
 const SET_TEMPLATE = 'boh-labels/filters/SET_TEMPLATE'
 
 const initialState = {
-  template: 'Shelf'
+  template: 'MasterPack'
 }
 
 export default typeToReducer({
