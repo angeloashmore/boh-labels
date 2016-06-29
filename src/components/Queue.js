@@ -1,3 +1,4 @@
+import Electron from 'electron'
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
@@ -6,6 +7,8 @@ import { Container, Icon, ListDivider, QueueItem, TopBar } from 'components'
 import { Button, Fieldset, Label, Select, TextField } from 'components/form'
 
 import styles from 'components/Queue.css'
+
+const { BrowserWindow } = Electron.remote
 
 const Queue = ({
   className: overrideClassName,
@@ -40,13 +43,22 @@ const Queue = ({
   const queueSize = items.reduce((a, b) => (a + b), 0)
   const disabled = !(queueSize > 0)
 
+  const handlePrint = () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow()
+    const { webContents } = focusedWindow
+
+    webContents.print({
+      printBackground: true
+    })
+  }
+
   return (
     <div className={className}>
       <TopBar styleName='top-bar'>
         <span>{queueSize} label{queueSize === 1 ? '' : 's'}</span>
         <Button
           disabled={disabled}
-          onClick={() => window.print()}
+          onClick={handlePrint}
           value="Print"
         />
       </TopBar>
@@ -57,9 +69,9 @@ const Queue = ({
             onChange={({ target }) => printOptionsActions.setTemplate(target.value)}
             value={printOptions.template}
           >
-            <option value='master_pack'>Master Pack</option>
-            <option value='physical_inventory'>Physical Inventory</option>
-            <option value='shelf'>Shelf</option>
+            <option value='MasterPack'>Master Pack</option>
+            <option value='PhysicalInventory'>Physical Inventory</option>
+            <option value='Shelf'>Shelf</option>
           </Select>
         </Fieldset>
       </Container>

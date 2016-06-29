@@ -1,0 +1,116 @@
+.base {
+  border-right: 1px solid #cccccc;
+  font-family: 'Myriad Set Pro';
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 4in;
+
+  &--small {
+    width: 2.75in;
+  }
+
+  &.tiny {
+    width: 2.25in;
+
+    .barcode-wrapper {
+      display: none;
+    }
+  }
+
+  &.inline {
+    border-right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+
+    .label {
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      min-width: 2.75in;
+    }
+  }
+}
+
+.label {
+  display: flex;
+  height: 1in;
+  page-break-inside: avoid;
+
+  &:nth-child(10),
+  &:last-child {
+    border-bottom: 1px solid #cccccc;
+  }
+
+  &:nth-child(10) {
+    page-break-after: always;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &__color-bar {
+      align-items: center;
+      color: white;
+      display: flex;
+      font-size: 14px;
+      height: 0.3in;
+      padding: 0 0.15in;
+
+      &__category {
+        flex-grow: 1;
+        font-weight: 600;
+      }
+
+      &__group {
+      }
+    }
+
+    &__body {
+      align-items: center;
+      display: flex;
+      flex-grow: 1;
+      padding: 0 0.15in;
+
+      &__key {
+        flex-grow: 1;
+        font-size: 46px;
+        font-weight: 500;
+        margin: 0;
+      }
+
+      &__metadata {
+        color: #646464;
+        font-size: 16px;
+        list-style: none;
+        text-align: right;
+
+        &__item {
+        }
+      }
+    }
+  }
+
+  &__barcode-wrapper {
+    position: relative;
+    width: 0.5in;
+
+    &__barcode {
+      display: block;
+      height: 28px;
+      left: -14px;
+      max-width: none;
+      position: absolute;
+      transform: rotate(90deg);
+      top: 34px;
+      width: 76px;
+
+      > svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}

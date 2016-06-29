@@ -2,6 +2,8 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
+import * as templates from 'components/templates'
+
 import styles from 'components/PrintSheet.css'
 
 const PrintSheet = ({
@@ -14,9 +16,15 @@ const PrintSheet = ({
     [overrideClassName]: overrideClassName
   })
 
+  const Template = templates[printOptions.template]
+
   return (
     <div className={className}>
-      Print {queue.size} labels using the {printOptions.template} template.
+      <Template
+        labels={labels}
+        printOptions={printOptions}
+        queue={queue}
+      />
     </div>
   )
 }

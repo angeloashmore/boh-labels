@@ -34,6 +34,7 @@
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "react": "^15.0.2",
+    "react-barcode": "^1.0.5",
     "react-css-modules": "^3.7.6",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",
