@@ -1,0 +1,64 @@
+.base {
+  font-family: 'Myriad Set Pro';
+  font-size: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  height: 4in;
+  width: 2.125in;
+
+  &__details {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 0.125in;
+
+    &__key {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    &__category {
+      font-weight: 600;
+    }
+
+    &__metadata {
+    }
+
+    &__upc {
+      font-family: Menlo, monospace;
+    }
+  }
+
+  &__barcodes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &__item {
+      align-items: center;
+      border-bottom: 1px solid #d8d8d8;
+      display: flex;
+      padding: 0.0625in 0;
+
+      &__index {
+        font-weight: 600;
+        text-align: center;
+        width: 0.5in;
+      }
+
+      &__barcode {
+        height: 0.1666in;
+        width: 1.5in;
+
+        & > svg {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
