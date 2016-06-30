@@ -1,3 +1,4 @@
+import Electron from 'electron'
 import React, { Component, PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
@@ -5,6 +6,8 @@ import cx from 'classnames'
 import { MasterList, PrintSheet, Queue } from 'components'
 
 import styles from 'components/App.css'
+
+const { BrowserWindow } = Electron.remote
 
 export default class App extends Component {
   static propTypes = {
@@ -26,6 +29,10 @@ export default class App extends Component {
 
   componentDidMount() {
     const { collectionActions, labelActions } = this.props
+
+    // Set sheet offset
+    const { BrowserWindow } = Electron.remote
+    BrowserWindow.getFocusedWindow().setSheetOffset(56)
 
     collectionActions.load()
     labelActions.load()

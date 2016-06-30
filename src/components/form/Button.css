@@ -1,7 +1,7 @@
 .base {
   background-color: transparent;
   color: #007aff;
-  font-size: 14px;
+  font-size: 12px;
 
   &:active {
     color: #0063cc;
@@ -15,6 +15,7 @@
     background-color: #fff;
     border-radius: 10em;
     box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.07), 0 0.5px 0.5px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
     font-weight: 600;
     padding: 5px 14px;
 

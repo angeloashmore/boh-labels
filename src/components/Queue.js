@@ -9,7 +9,7 @@ import * as templates from 'components/templates'
 
 import styles from 'components/Queue.css'
 
-const { BrowserWindow } = Electron.remote
+const { BrowserWindow, dialog } = Electron.remote
 
 const Queue = ({
   className: overrideClassName,
@@ -45,6 +45,29 @@ const Queue = ({
   const disabled = !(queueSize > 0)
 
   const { handlePrint } = templates[printOptions.template]
+
+  const handleClearAll = () => {
+    const clearAll = () => queueActions.removeAll()
+
+    if (queueSize > 5) {
+      dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
+        type: 'question',
+        buttons: [
+          'OK',
+          'Cancel'
+        ],
+        defaultId: 0,
+        cancelId: 1,
+        message: `Are you sure you want to clear all ${queueSize} labels?`
+      }, (response) => {
+        if (response === 0) {
+          clearAll()
+        }
+      })
+    } else {
+      clearAll()
+    }
+  }
 
   return (
     <div className={className}>
@@ -88,7 +111,7 @@ const Queue = ({
         <Button
           chrome={false}
           disabled={disabled}
-          onClick={() => queueActions.removeAll()}
+          onClick={handleClearAll}
           value="Clear All"
         />
       </Container>
