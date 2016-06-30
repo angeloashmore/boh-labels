@@ -39,17 +39,6 @@ const MasterList = ({
     />
   ]
 
-  const topBar = (
-    <TopBar styleName='top-bar'>
-      <Icon type='search' styleName='search-icon' />
-      <input
-        onChange={({ target }) => filterActions.setQuery(target.value)}
-        styleName='search'
-        type='text'
-      />
-    </TopBar>
-  )
-
   const filteredLabels = function() {
     const { collection: collectionId, query } = filters
 
@@ -71,6 +60,26 @@ const MasterList = ({
       return result
     })
   }()
+
+  const topBar = (
+    <TopBar styleName='top-bar'>
+      <Icon type='search' styleName='search-icon' />
+      <input
+        onKeyPress={({ key, target }) => {
+            if (key === 'Enter') {
+              if (filteredLabels.size > 0) {
+                queueActions.addMultiple([filteredLabels.first().id])
+              }
+
+              target.select()
+            }
+          }}
+        onChange={({ target }) => filterActions.setQuery(target.value)}
+        styleName='search'
+        type='text'
+      />
+    </TopBar>
+  )
 
   const labelsList = filteredLabels.map(({ category, id, key, metadata }) => (
       <QueueItem
