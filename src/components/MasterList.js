@@ -20,10 +20,6 @@ const MasterList = ({
     [overrideClassName]: overrideClassName
   })
 
-  const collection = collections.items.find((value, key) => {
-    return key === filters.collection
-  })
-
   const accessoriesLeft = (type, selected = false) => [
     <Icon
       className={styles['accessories-left-icon']}
@@ -55,10 +51,14 @@ const MasterList = ({
     </TopBar>
   )
 
-  const labelsList = () => {
-    const { query } = filters
+  const filteredLabels = function() {
+    const { collection: collectionId, query } = filters
 
-    const filteredItems = labels.items.filter((item) => {
+    const collection = collections.items.find((value, key) => {
+      return key === collectionId
+    })
+
+    return labels.items.filter((item) => {
       let result = true
 
       if (collection) {
@@ -71,8 +71,9 @@ const MasterList = ({
 
       return result
     })
+  }()
 
-    return filteredItems.map(({ category, id, key, metadata }) => (
+  const labelsList = filteredLabels.map(({ category, id, key, metadata }) => (
       <QueueItem
         key={id}
         accessoriesLeft={accessoriesLeft('label')}
@@ -81,12 +82,12 @@ const MasterList = ({
         metadata={metadata}
         title={key}
       />
-    ))
-  }
+    )
+  )
 
   const renderList = (
     <div styleName='list'>
-      {labelsList()}
+      {labelsList}
     </div>
   )
 
@@ -111,16 +112,21 @@ const MasterList = ({
                <option value={id}>{key}</option>
              ))}
           </Select>
-          {collection ? (
-            <Icon
-              onClick={() => {queueActions.addMultiple(collection.label_ids)}}
-              styleName='addAllButton'
-              type='addAll'
-            />
-           ) : ''}
         </Fieldset>
       </Container>
       {labels.isPending || labels.isPending ? renderLoading : renderList}
+      <Container
+        secondary={true}
+        slim={true}
+        styleName='bottomBar'
+      >
+        <Button
+          chrome={false}
+          disabled={!(filteredLabels.size > 0)}
+          onClick={() => queueActions.addMultiple(filteredLabels.map((label) => label.id))}
+          value="Add All Visible"
+        />
+      </Container>
     </div>
   )
 }
