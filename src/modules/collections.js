@@ -8,7 +8,7 @@ const initialState = {
   error: null,
   isPending: false,
   isRejected: false,
-  items: Immutable.Map()
+  items: Immutable.OrderedMap()
 }
 
 export default typeToReducer({
@@ -20,7 +20,7 @@ export default typeToReducer({
 
     FULFILLED: (state, action) => ({
       ...initialState,
-      items: Immutable.Map(action.payload.map((item) => [item.id, item]))
+      items: Immutable.OrderedMap(action.payload.map((item) => [item.id, item]))
     }),
 
     REJECTED: (state, action) => ({

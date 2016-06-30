@@ -28,6 +28,7 @@
     &__category,
     &__part-number {
       font-size: 20px;
+      text-align: center;
     }
 
     &__identifier {
