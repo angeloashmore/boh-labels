@@ -2,6 +2,7 @@ import Electron from 'electron'
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
+import Infinite from 'react-infinite'
 
 import fuzzySearch from 'lib/fuzzySearch'
 import { Container, Icon, ListDivider, QueueItem, TopBar } from 'components'
@@ -94,9 +95,13 @@ const MasterList = ({
   )
 
   const renderList = (
-    <div styleName='list'>
+    <Infinite
+      containerHeight={400}
+      elementHeight={50}
+      styleName='list'
+    >
       {labelsList}
-    </div>
+    </Infinite>
   )
 
   const renderLoading = (

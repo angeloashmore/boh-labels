@@ -7,7 +7,7 @@ import { MasterList, PrintSheet, Queue } from 'components'
 
 import styles from 'components/App.css'
 
-const { app, BrowserWindow } = Electron.remote
+const { BrowserWindow } = Electron.remote
 
 export default class App extends Component {
   static propTypes = {
@@ -31,9 +31,7 @@ export default class App extends Component {
     const { collectionActions, labelActions } = this.props
 
     // Set sheet offset
-    app.on('ready', () => {
-      BrowserWindow.getFocusedWindow().setSheetOffset(56)
-    })
+    BrowserWindow.getFocusedWindow().setSheetOffset(56)
 
     collectionActions.load()
     labelActions.load()
