@@ -25,6 +25,10 @@
   margin-left: 0;
 }
 
+.addAllButton {
+  margin-left: 10px;
+}
+
 .list {
   flex-grow: 1;
   overflow: auto;

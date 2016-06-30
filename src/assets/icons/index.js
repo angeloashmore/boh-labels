@@ -1,6 +1,9 @@
 export add from 'assets/icons/add.svg'
 export addSelected from 'assets/icons/add-selected.svg'
 
+export addAll from 'assets/icons/add-all.svg'
+export addAllSelected from 'assets/icons/add-all-selected.svg'
+
 export collection from 'assets/icons/collection.svg'
 export collectionSelected from 'assets/icons/collection-selected.svg'
 
