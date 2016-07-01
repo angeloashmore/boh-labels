@@ -14,9 +14,9 @@ const { BrowserWindow, dialog } = Electron.remote
 const Queue = ({
   className: overrideClassName,
   labels,
-  items,
   printOptions,
   printOptionsActions,
+  queue,
   queueActions
 }) => {
   const className = cx(styles.base, {
@@ -42,7 +42,7 @@ const Queue = ({
     />
   ]
 
-  const queueSize = items.reduce((a, b) => (a + b), 0)
+  const queueSize = queue.reduce((a, b) => (a + b), 0)
   const disabled = !(queueSize > 0)
 
   const { handlePrint } = templates[printOptions.template]
@@ -94,7 +94,7 @@ const Queue = ({
         </Fieldset>
       </Container>
       <Container styleName='list'>
-        {items.map((quantity, id) => {
+        {queue.map((quantity, id) => {
           const { category, key, metadata } = labels.items.get(id)
           return (
             <QueueItem
