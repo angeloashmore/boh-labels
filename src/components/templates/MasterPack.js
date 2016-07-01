@@ -87,8 +87,7 @@ const MasterPack = ({
 }
 
 MasterPack.handlePrint = () => {
-  const focusedWindow = BrowserWindow.getFocusedWindow()
-  const { webContents } = focusedWindow
+  const { webContents } = BrowserWindow.getAllWindows()[0]
 
   webContents.printToPDF({
     marginsType: 1,

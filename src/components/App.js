@@ -31,7 +31,7 @@ export default class App extends Component {
     const { collectionActions, labelActions } = this.props
 
     // Set sheet offset
-    BrowserWindow.getFocusedWindow().setSheetOffset(56)
+    BrowserWindow.getAllWindows()[0].setSheetOffset(56)
 
     collectionActions.load()
     labelActions.load()

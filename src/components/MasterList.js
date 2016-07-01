@@ -96,8 +96,8 @@ const MasterList = ({
 
   const renderList = (
     <Infinite
-      containerHeight={400}
-      elementHeight={50}
+      containerHeight={BrowserWindow.getAllWindows()[0].getSize()[1] - 91}
+      elementHeight={60}
       styleName='list'
     >
       {labelsList}

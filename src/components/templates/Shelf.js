@@ -1,9 +1,11 @@
-import Electron from 'electron'
+import Electron, { shell } from 'electron'
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 import Immutable from 'immutable'
 import Barcode from 'react-barcode'
+import temp from 'temp'
+import fs from 'fs'
 
 import styles from 'components/templates/Shelf.css'
 
@@ -76,11 +78,24 @@ const Shelf = ({
 }
 
 Shelf.handlePrint = () => {
-  const focusedWindow = BrowserWindow.getFocusedWindow()
-  const { webContents } = focusedWindow
+  const { webContents } = BrowserWindow.getAllWindows()[0]
 
-  webContents.print({
+  webContents.printToPDF({
+    pageSize: 'Letter',
     printBackground: true
+  }, (printToPDFError, data) => {
+    if (printToPDFError) throw printToPDFError
+
+    const tempPath = temp.path({
+      prefix: 'boh-labels__shelf__',
+      suffix: '.pdf'
+    })
+
+    fs.writeFile(tempPath, data, (writeFileError) => {
+      if (writeFileError) throw writeFileError
+
+      shell.openItem(tempPath)
+    })
   })
 }
 
