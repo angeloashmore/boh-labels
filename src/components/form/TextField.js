@@ -7,6 +7,7 @@ import styles from 'components/form/TextField.css'
 const TextField = ({
   children,
   className: overrideClassName,
+  onClick = () => {},
   onChange = () => {},
   value
 }) => {
@@ -17,6 +18,7 @@ const TextField = ({
   return (
     <input
       className={className}
+      onClick={onClick}
       onChange={onChange}
       type='text'
       value={value}

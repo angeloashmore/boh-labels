@@ -35,6 +35,7 @@ const Queue = ({
     <TextField
       className={styles['accessories-left-quantity']}
       value={quantity}
+      onClick={({ target }) => target.select()}
       onChange={({ target }) => {
           queueActions.changeQuantity({ id, quantity: target.value })
         }}
