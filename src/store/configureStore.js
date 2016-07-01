@@ -17,6 +17,6 @@ const enhancer = compose(
   applyMiddleware(thunk, promise, router, logger)
 )
 
-export default function configureStore(initialState) {
-  return createStore(rootReducer, initialState, enhancer)
-}
+export default (initialState) => (
+  createStore(rootReducer, initialState, enhancer)
+)

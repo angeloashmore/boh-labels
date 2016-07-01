@@ -23,7 +23,6 @@ const PhysicalInventory = ({
 
   const renderLabel = (quantity, id) => {
     const label = labels.items.get(id)
-    const date = new Date()
 
     const masterPackQuantity = label.masterPackQuantity ? label.masterPackQuantity : 1
 
@@ -39,22 +38,22 @@ const PhysicalInventory = ({
         </div>
         <ul styleName='label__barcodes'>
           {Immutable.Range(0, masterPackQuantity).map((i) => (
-             <li styleName='label__barcodes__item'>
-               <span styleName='label__barcodes__item__index'>{i + 1}</span>
-               <div styleName='label__barcodes__item__barcode'>
-                 <Barcode
-                   displayValue={false}
-                   fontSize={0}
-                   format='UPC'
-                   height={11}
-                   margin={0}
-                   textMargin={0}
-                   value={label.upc.toString()}
-                   width={1}
-                 />
-               </div>
-             </li>
-           ))}
+            <li styleName='label__barcodes__item'>
+              <span styleName='label__barcodes__item__index'>{i + 1}</span>
+              <div styleName='label__barcodes__item__barcode'>
+                <Barcode
+                  displayValue={false}
+                  fontSize={0}
+                  format='UPC'
+                  height={11}
+                  margin={0}
+                  textMargin={0}
+                  value={label.upc.toString()}
+                  width={1}
+                />
+              </div>
+            </li>
+          ))}
         </ul>
       </li>
     ))

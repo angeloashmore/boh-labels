@@ -43,15 +43,15 @@ const MasterPack = ({
         </div>
         <ul styleName='label__metadata'>
           {Object.entries(label.metadata).map(([key, value]) => (
-             <li styleName='label__metadata__item'>
-               <span styleName='label__metadata__item__key'>
-                 {inflect.titleize(key)}
-               </span>
-               <span styleName='label__metadata__item__value'>
-                 {value}
-               </span>
-             </li>
-           ))}
+            <li styleName='label__metadata__item'>
+              <span styleName='label__metadata__item__key'>
+                {inflect.titleize(key)}
+              </span>
+              <span styleName='label__metadata__item__value'>
+                {value}
+              </span>
+            </li>
+          ))}
         </ul>
         <div styleName='label__footer'>
           <div styleName='label__footer__date'>

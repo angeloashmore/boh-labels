@@ -1,4 +1,3 @@
-import Electron from 'electron'
 import React, { Component, PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 
@@ -10,15 +9,13 @@ import {
 
 import styles from 'components/App.css'
 
-const { BrowserWindow } = Electron.remote
-
 export default class App extends Component {
   static propTypes = {
     loadCollections: PropTypes.func.isRequired,
-    loadLabels: PropTypes.func.isRequired,
+    loadLabels: PropTypes.func.isRequired
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const { loadCollections, loadLabels } = this.props
 
     // Populate store
@@ -26,7 +23,7 @@ export default class App extends Component {
     loadLabels()
   }
 
-  render() {
+  render () {
     return (
       <div styleName='base'>
         <MasterListContainer styleName='master-list' />

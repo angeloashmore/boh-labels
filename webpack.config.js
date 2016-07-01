@@ -1,9 +1,9 @@
-const webpack = require('webpack')
+const path = require('path')
 const postcssNested = require('postcss-nested')
 const postcssInlineSvg = require('postcss-inline-svg')
 
 module.exports = {
-  context: __dirname + '/src',
+  context: path.join(__dirname, 'src'),
 
   devtool: 'source-map',
 
@@ -14,7 +14,7 @@ module.exports = {
 
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/dist',
+    path: path.join(__dirname, 'dist'),
     publicPath: 'http://localhost:8080/dist/'
   },
 
@@ -30,7 +30,7 @@ module.exports = {
         loader: 'babel',
         exclude: /node_modules/,
         query: {
-          "presets": ["es2015", "stage-0", "react"]
+          'presets': ['es2015', 'stage-0', 'react']
         }
       },
       {
@@ -47,7 +47,7 @@ module.exports = {
           'css?' + JSON.stringify({
             modules: true,
             importLoaders: 1,
-            localIdentName: "[path]___[name]__[local]___[hash:base64:5]"
+            localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
           }),
           'postcss'
         ]
@@ -56,7 +56,7 @@ module.exports = {
         test: /\.svg$/,
         loader: 'svg-url',
         query: {
-          "noquotes": true
+          'noquotes': true
         }
       }
     ]

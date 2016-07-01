@@ -1,4 +1,5 @@
 const electron = require('electron')
+const path = require('path')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -7,7 +8,6 @@ const BrowserWindow = electron.BrowserWindow
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-let printWindow
 
 function createWindows () {
   // Create the browser window.
@@ -23,7 +23,7 @@ function createWindows () {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/index.html')
+  mainWindow.loadURL(path.join('file://', __dirname, 'index.html'))
 
   // Set the sheet offset.
   mainWindow.setSheetOffset(56)

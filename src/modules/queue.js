@@ -18,7 +18,9 @@ export default typeToReducer({
   }),
 
   [ADD_MULTIPLE]: ({ items }, { payload: ids }) => {
-    ids.forEach((id) => items = items.set(id, items.get(id, 0) + 1))
+    ids.forEach((id) => {
+      items = items.set(id, items.get(id, 0) + 1)
+    })
 
     return { items }
   },

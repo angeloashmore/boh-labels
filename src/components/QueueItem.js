@@ -31,7 +31,7 @@ const QueueItem = ({
     <Container
       className={className}
       shadow={false}
-      slim={true}
+      slim
     >
       <Accessories
         accessories={accessoriesLeft}

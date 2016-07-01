@@ -3,7 +3,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import { Container, Icon, ListDivider, QueueItem, TopBar } from 'components'
+import { Container, Icon, QueueItem, TopBar } from 'components'
 import { Button, Fieldset, Label, Select, TextField } from 'components/form'
 import * as templates from 'components/templates'
 
@@ -37,8 +37,8 @@ const Queue = ({
       value={quantity}
       onClick={({ target }) => target.select()}
       onChange={({ target }) => {
-          queueActions.changeQuantity({ id, quantity: target.value })
-        }}
+        queueActions.changeQuantity({ id, quantity: target.value })
+      }}
     />
   ]
 
@@ -77,10 +77,10 @@ const Queue = ({
         <Button
           disabled={disabled}
           onClick={handlePrint}
-          value="Print"
+          value='Print'
         />
       </TopBar>
-      <Container slim={true}>
+      <Container slim>
         <Fieldset>
           <Label>Template:</Label>
           <Select
@@ -108,12 +108,12 @@ const Queue = ({
           )
         })}
       </Container>
-      <Container slim={true} styleName='clearAll'>
+      <Container slim styleName='clearAll'>
         <Button
           chrome={false}
           disabled={disabled}
           onClick={handleClearAll}
-          value="Clear All"
+          value='Clear All'
         />
       </Container>
     </div>

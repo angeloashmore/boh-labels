@@ -5,8 +5,8 @@ import cx from 'classnames'
 import Infinite from 'react-infinite'
 
 import fuzzySearch from 'lib/fuzzySearch'
-import { Container, Icon, ListDivider, QueueItem, TopBar } from 'components'
-import { Button, Fieldset, Label, Select, TextField } from 'components/form'
+import { Container, Icon, QueueItem, TopBar } from 'components'
+import { Button, Fieldset, Label, Select } from 'components/form'
 
 import styles from 'components/MasterList.css'
 
@@ -24,23 +24,23 @@ const MasterList = ({
     [overrideClassName]: overrideClassName
   })
 
-  const accessoriesLeft = (selected = false) => [
+  const accessoriesLeft = (selected = false) => ([
     <Icon
       className={styles['accessories-left-icon']}
       selected={selected}
       type='label'
     />
-  ]
+  ])
 
-  const accessoriesRight = (id, selected = false) => [
+  const accessoriesRight = (id, selected = false) => ([
     <Icon
       onClick={() => queueActions.add(id)}
       selected={selected}
       type='add'
     />
-  ]
+  ])
 
-  const filteredLabels = function() {
+  const filteredLabels = (function () {
     const { collection: collectionId, query } = filters
 
     const collection = collections.items.find((value, key) => {
@@ -60,21 +60,21 @@ const MasterList = ({
 
       return result
     })
-  }()
+  })()
 
   const topBar = (
     <TopBar styleName='top-bar'>
       <Icon type='search' styleName='search-icon' />
       <input
         onKeyPress={({ key, target }) => {
-            if (key === 'Enter') {
-              if (filteredLabels.size > 0) {
-                queueActions.addMultiple([filteredLabels.first().id])
-              }
-
-              target.select()
+          if (key === 'Enter') {
+            if (filteredLabels.size > 0) {
+              queueActions.addMultiple([filteredLabels.first().id])
             }
-          }}
+
+            target.select()
+          }
+        }}
         onChange={({ target }) => filterActions.setQuery(target.value)}
         styleName='search'
         type='text'
@@ -83,16 +83,15 @@ const MasterList = ({
   )
 
   const labelsList = filteredLabels.map(({ category, id, key, metadata }) => (
-      <QueueItem
-        key={id}
-        accessoriesLeft={accessoriesLeft()}
-        accessoriesRight={accessoriesRight(id)}
-        category={category}
-        metadata={metadata}
-        title={key}
-      />
-    )
-  )
+    <QueueItem
+      key={id}
+      accessoriesLeft={accessoriesLeft()}
+      accessoriesRight={accessoriesRight(id)}
+      category={category}
+      metadata={metadata}
+      title={key}
+    />
+  ))
 
   const renderList = (
     <Infinite
@@ -136,7 +135,7 @@ const MasterList = ({
   return (
     <div className={className}>
       {topBar}
-      <Container slim={true}>
+      <Container slim>
         <Fieldset>
           <Label>Collection:</Label>
           <Select
@@ -145,22 +144,22 @@ const MasterList = ({
           >
             <option value=''>All labels</option>
             {collections.items.map(({ id, key }) => (
-               <option value={id}>{key}</option>
-             ))}
+              <option value={id}>{key}</option>
+            ))}
           </Select>
         </Fieldset>
       </Container>
       {labels.isPending || labels.isPending ? renderLoading : renderList}
       <Container
-        secondary={true}
-        slim={true}
+        secondary
+        slim
         styleName='bottomBar'
       >
         <Button
           chrome={false}
           disabled={!(filteredLabels.size > 0)}
           onClick={handleAddAll}
-          value="Add All Visible"
+          value='Add All Visible'
         />
       </Container>
     </div>
