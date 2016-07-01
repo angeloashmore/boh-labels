@@ -8,8 +8,8 @@ const initialState = {
 }
 
 export default typeToReducer({
-  [SET_TEMPLATE]: (action, { payload }) => ({
-    template: payload
+  [SET_TEMPLATE]: (_action, { payload: template }) => ({
+    template
   })
 }, initialState)
 

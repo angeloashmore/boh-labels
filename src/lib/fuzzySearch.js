@@ -1,5 +1,5 @@
 export default (obj, query, caseInsensitive = true) => {
-  let queryItems = query.split(' ')
+  let queryItems = query.trim().split(' ')
 
   let subject = obj
 

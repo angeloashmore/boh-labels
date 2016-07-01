@@ -12,24 +12,24 @@ const initialState = {
 }
 
 export default typeToReducer({
-  [CLEAR_COLLECTION]: (state) => ({
+  [CLEAR_COLLECTION]: ({ query }) => ({
     ...initialState,
-    query: state.query
+    query
   }),
 
-  [SET_COLLECTION]: (state, { payload }) => ({
+  [SET_COLLECTION]: (state, { payload: collection }) => ({
     ...state,
-    collection: payload.trim()
+    collection
   }),
 
-  [CLEAR_QUERY]: (state) => ({
+  [CLEAR_QUERY]: ({ collection }) => ({
     ...initialState,
-    collection: state.collection
+    collection
   }),
 
-  [SET_QUERY]: (state, { payload }) => ({
+  [SET_QUERY]: (state, { payload: query }) => ({
     ...state,
-    query: payload.trim()
+    query
   })
 }, initialState)
 

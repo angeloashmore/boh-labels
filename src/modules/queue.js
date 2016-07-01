@@ -27,19 +27,18 @@ export default typeToReducer({
     items: items.delete(id)
   }),
 
-  [REMOVE_ALL]: ({ items }) => ({
-    items: items.clear()
-  }),
+  [REMOVE_ALL]: () => (initialState),
 
   [CHANGE_QUANTITY]: ({ items }, { payload }) => {
-    const quantity = Number.parseInt(payload.quantity)
+    const { id, quantity } = payload
+    const parsedQuantity = Number.parseInt(quantity)
 
     let modifiedItems
 
-    if (quantity > 0) {
-      modifiedItems = items.set(payload.id, quantity)
+    if (parsedQuantity > 0) {
+      modifiedItems = items.set(id, parsedQuantity)
     } else {
-      modifiedItems = items.delete(payload.id)
+      modifiedItems = items.delete(id)
     }
 
     return {

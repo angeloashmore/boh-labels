@@ -13,21 +13,26 @@ const initialState = {
 
 export default typeToReducer({
   [LOAD]: {
-    PENDING: (state) => ({
+    PENDING: () => ({
       ...initialState,
       isPending: true
     }),
 
-    FULFILLED: (state, action) => ({
-      ...initialState,
-      items: Immutable.OrderedMap(action.payload.map((item) => [item.id, item]))
-    }),
+    FULFILLED: (_state, { payload: collections }) => {
+      const keyValuePairs = collections.map((x) => [x.id, x])
+      const items = Immutable.OrderedMap(keyValuePairs)
 
-    REJECTED: (state, action) => ({
+      return {
+        ...initialState,
+        items
+      }
+    },
+
+    REJECTED: ({ items }, { payload: error }) => ({
       ...initialState,
-      error: action.payload,
+      error,
       isRejected: true,
-      items: state.collections
+      items
     })
   }
 }, initialState)

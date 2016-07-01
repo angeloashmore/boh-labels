@@ -24,17 +24,17 @@ const MasterList = ({
     [overrideClassName]: overrideClassName
   })
 
-  const accessoriesLeft = (type, selected = false) => [
+  const accessoriesLeft = (selected = false) => [
     <Icon
       className={styles['accessories-left-icon']}
       selected={selected}
-      type={type}
+      type='label'
     />
   ]
 
-  const accessoriesRight = (ids, selected = false) => [
+  const accessoriesRight = (id, selected = false) => [
     <Icon
-      onClick={() => queueActions.addMultiple(ids)}
+      onClick={() => queueActions.add(id)}
       selected={selected}
       type='add'
     />
@@ -85,8 +85,8 @@ const MasterList = ({
   const labelsList = filteredLabels.map(({ category, id, key, metadata }) => (
       <QueueItem
         key={id}
-        accessoriesLeft={accessoriesLeft('label')}
-        accessoriesRight={accessoriesRight([id])}
+        accessoriesLeft={accessoriesLeft()}
+        accessoriesRight={accessoriesRight(id)}
         category={category}
         metadata={metadata}
         title={key}
