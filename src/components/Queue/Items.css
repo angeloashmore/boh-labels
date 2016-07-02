@@ -1,0 +1,18 @@
+.base {
+  align-items: flex-start;
+  flex-direction: column;
+  flex-shrink: 1;
+  flex-grow: 1;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.accessories-left-quantity {
+  flex-grow: 0;
+  font-size: 14px;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+  width: 30px;
+}
