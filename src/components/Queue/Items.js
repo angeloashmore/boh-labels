@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 import Infinite from 'react-infinite'
 
-import { Container, Icon, QueueItem } from 'components'
+import { Icon, QueueItem } from 'components'
 import { TextField } from 'components/form'
 
 import styles from 'components/Queue/Items.css'

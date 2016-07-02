@@ -1,0 +1,19 @@
+.base {
+  padding: 0;
+}
+
+.search-icon {
+  padding-left: 3.5px;
+  width: 50px;
+}
+
+.search {
+  background-color: transparent;
+  flex-grow: 1;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  padding-right: 15px;
+  padding-left: 0;
+  margin-left: 0;
+}

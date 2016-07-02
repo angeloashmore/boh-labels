@@ -1,16 +1,11 @@
-import Electron from 'electron'
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
-import Infinite from 'react-infinite'
 
 import fuzzySearch from 'lib/fuzzySearch'
-import { Container, Icon, QueueItem, TopBar } from 'components'
-import { Button, Fieldset, Label, Select } from 'components/form'
+import { CollectionSelect, Footer, Header, Items } from 'components/MasterList/index'
 
 import styles from 'components/MasterList.css'
-
-const { BrowserWindow, dialog } = Electron.remote
 
 const MasterList = ({
   className: overrideClassName,
@@ -23,22 +18,6 @@ const MasterList = ({
   const className = cx(styles.base, {
     [overrideClassName]: overrideClassName
   })
-
-  const accessoriesLeft = (selected = false) => ([
-    <Icon
-      className={styles['accessories-left-icon']}
-      selected={selected}
-      type='label'
-    />
-  ])
-
-  const accessoriesRight = (id, selected = false) => ([
-    <Icon
-      onClick={() => queueActions.add(id)}
-      selected={selected}
-      type='add'
-    />
-  ])
 
   const filteredLabels = (function () {
     const { collection: collectionId, query } = filters
@@ -62,106 +41,27 @@ const MasterList = ({
     })
   })()
 
-  const topBar = (
-    <TopBar styleName='top-bar'>
-      <Icon type='search' styleName='search-icon' />
-      <input
-        onKeyPress={({ key, target }) => {
-          if (key === 'Enter') {
-            if (filteredLabels.size > 0) {
-              queueActions.addMultiple([filteredLabels.first().id])
-            }
-
-            target.select()
-          }
-        }}
-        onChange={({ target }) => filterActions.setQuery(target.value)}
-        styleName='search'
-        type='text'
-      />
-    </TopBar>
-  )
-
-  const labelsList = filteredLabels.map(({ category, id, key, metadata }) => (
-    <QueueItem
-      key={id}
-      accessoriesLeft={accessoriesLeft()}
-      accessoriesRight={accessoriesRight(id)}
-      category={category}
-      metadata={metadata}
-      title={key}
-    />
-  ))
-
-  const renderList = (
-    <Infinite
-      containerHeight={BrowserWindow.getAllWindows()[0].getSize()[1] - 91}
-      elementHeight={60}
-      styleName='list'
-    >
-      {labelsList}
-    </Infinite>
-  )
-
-  const renderLoading = (
-    <div styleName='loading'>
-      Loading
-    </div>
-  )
-
-  const handleAddAll = () => {
-    const addAll = () => queueActions.addMultiple(filteredLabels.map((label) => label.id))
-
-    if (filteredLabels.size > 5) {
-      dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
-        type: 'question',
-        buttons: [
-          'OK',
-          'Cancel'
-        ],
-        defaultId: 0,
-        cancelId: 1,
-        message: `Are you sure you want to add ${filteredLabels.size} labels?`
-      }, (response) => {
-        if (response === 0) {
-          addAll()
-        }
-      })
-    } else {
-      addAll()
-    }
-  }
-
   return (
     <div className={className}>
-      {topBar}
-      <Container slim>
-        <Fieldset>
-          <Label>Collection:</Label>
-          <Select
-            onChange={({ target }) => filterActions.setCollection(target.value)}
-            value={filters.collection}
-          >
-            <option value=''>All labels</option>
-            {collections.items.map(({ id, key }) => (
-              <option value={id}>{key}</option>
-            ))}
-          </Select>
-        </Fieldset>
-      </Container>
-      {labels.isPending || labels.isPending ? renderLoading : renderList}
-      <Container
-        secondary
-        slim
-        styleName='bottomBar'
-      >
-        <Button
-          chrome={false}
-          disabled={!(filteredLabels.size > 0)}
-          onClick={handleAddAll}
-          value='Add All Visible'
-        />
-      </Container>
+      <Header
+        addQueueItem={queueActions.add}
+        labels={filteredLabels}
+        setFilterQuery={filterActions.setQuery}
+      />
+      <CollectionSelect
+        collection={filters.collection}
+        collections={collections.items}
+        setCollection={filterActions.setCollection}
+      />
+      <Items
+        addQueueItem={queueActions.add}
+        labels={filteredLabels}
+        loading={labels.isPending}
+      />
+      <Footer
+        addMultipleQueueItems={queueActions.addMultiple}
+        filteredLabels={filteredLabels}
+      />
     </div>
   )
 }
