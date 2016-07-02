@@ -42,15 +42,14 @@ const Queue = ({
     />
   ]
 
-  const queueSize = queue.reduce((a, b) => (a + b), 0)
-  const disabled = !(queueSize > 0)
+  const disabled = !(queue.size > 0)
 
   const { handlePrint } = templates[printOptions.template]
 
   const handleClearAll = () => {
     const clearAll = () => queueActions.removeAll()
 
-    if (queueSize > 5) {
+    if (queue.size > 5) {
       dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
         type: 'question',
         buttons: [
@@ -59,7 +58,7 @@ const Queue = ({
         ],
         defaultId: 0,
         cancelId: 1,
-        message: `Are you sure you want to clear all ${queueSize} labels?`
+        message: `Are you sure you want to clear all ${queue.size} labels?`
       }, (response) => {
         if (response === 0) {
           clearAll()
@@ -73,7 +72,7 @@ const Queue = ({
   return (
     <div className={className}>
       <TopBar styleName='top-bar'>
-        <span>{queueSize} label{queueSize === 1 ? '' : 's'}</span>
+        <span>{queue.size} label{queue.size === 1 ? '' : 's'}</span>
         <Button
           disabled={disabled}
           onClick={handlePrint}
@@ -94,7 +93,7 @@ const Queue = ({
         </Fieldset>
       </Container>
       <Container styleName='list'>
-        {queue.map((quantity, id) => {
+        {queue.items.map((quantity, id) => {
           const { category, key, metadata } = labels.items.get(id)
           return (
             <QueueItem

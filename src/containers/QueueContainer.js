@@ -8,7 +8,7 @@ import * as queueActions from 'modules/queue'
 const mapStateToProps = (state) => ({
   labels: state.labels,
   printOptions: state.printOptions,
-  queue: state.queue.items
+  queue: state.queue
 })
 
 const mapDispatchToProps = (dispatch) => ({

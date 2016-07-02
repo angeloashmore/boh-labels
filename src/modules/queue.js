@@ -9,42 +9,61 @@ const REMOVE_ALL = 'boh-labels/queue/REMOVE_ALL'
 const CHANGE_QUANTITY = 'boh-labels/queue/CHANGE_QUANTITY'
 
 const initialState = {
-  items: Immutable.OrderedMap()
+  items: Immutable.OrderedMap(),
+  size: 0
+}
+
+const calculateSize = (queue) => {
+  return queue.reduce((a, b) => (a + b), 0)
 }
 
 export default typeToReducer({
-  [ADD]: ({ items }, { payload: id }) => ({
-    items: items.set(id, items.get(id, 0) + 1)
-  }),
+  [ADD]: ({ items: origItems }, { payload: id }) => {
+    const items = origItems.set(id, origItems.get(id, 0) + 1)
+
+    return {
+      items,
+      size: calculateSize(items)
+    }
+  },
 
   [ADD_MULTIPLE]: ({ items }, { payload: ids }) => {
     ids.forEach((id) => {
       items = items.set(id, items.get(id, 0) + 1)
     })
 
-    return { items }
+    return {
+      items,
+      size: calculateSize(items)
+    }
   },
 
-  [REMOVE]: ({ items }, { payload: id }) => ({
-    items: items.delete(id)
-  }),
+  [REMOVE]: ({ items: origItems, size }, { payload: id }) => {
+    const items = origItems.delete(id)
+
+    return {
+      items,
+      size: calculateSize(items)
+    }
+  },
 
   [REMOVE_ALL]: () => (initialState),
 
-  [CHANGE_QUANTITY]: ({ items }, { payload }) => {
+  [CHANGE_QUANTITY]: ({ items: origItems }, { payload }) => {
     const { id, quantity } = payload
     const parsedQuantity = Number.parseInt(quantity)
 
-    let modifiedItems
+    let items
 
     if (parsedQuantity > 0) {
-      modifiedItems = items.set(id, parsedQuantity)
+      items = origItems.set(id, parsedQuantity)
     } else {
-      modifiedItems = items.delete(id)
+      items = origItems.delete(id)
     }
 
     return {
-      items: modifiedItems
+      items,
+      size: calculateSize(items)
     }
   }
 }, initialState)
