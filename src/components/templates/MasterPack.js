@@ -14,7 +14,7 @@ import styles from 'components/templates/MasterPack.css'
 const inflect = Inflect()
 const { BrowserWindow } = Electron.remote
 
-const MasterPack = ({
+const MasterPackHorizontal = ({
   className: overrideClassName,
   labels,
   printOptions,
@@ -31,48 +31,66 @@ const MasterPack = ({
     return Immutable.Range(0, quantity).map(() => (
       <li styleName='label'>
         <div styleName='label__stamp'>
-          <span styleName='label__stamp__category'>
-            {label.category}
-          </span>
-          <span styleName='label__stamp__identifier'>
-            {label.key.substr(2, 3)}
-          </span>
-          <span styleName='label__stamp__part-number'>
-            {label.key}
-          </span>
-        </div>
-        <ul styleName='label__metadata'>
-          {Object.entries(label.metadata).map(([key, value]) => (
-            <li styleName='label__metadata__item'>
-              <span styleName='label__metadata__item__key'>
-                {inflect.titleize(key)}
-              </span>
-              <span styleName='label__metadata__item__value'>
-                {value}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <div styleName='label__footer'>
-          <div styleName='label__footer__date'>
-            <span styleName='label__footer__date__month'>
-              {months.abbr[date.getMonth()]}
+          <div styleName='stamp'>
+            <span styleName='stamp__category'>
+              {label.category}
             </span>
-            <span styleName='label__footer__date__date'>
-              {date.getDate()}
+            <span styleName='stamp__identifier'>
+              {label.key.substr(2, 3)}
+            </span>
+            <span styleName='stamp__part-number'>
+              {label.key}
             </span>
           </div>
-          <div styleName='label__footer__barcode'>
-            <Barcode
-              displayValue={false}
-              fontSize={0}
-              format='UPC'
-              height={13}
-              margin={0}
-              textMargin={0}
-              value={label.upc.toString()}
-              width={1}
-            />
+        </div>
+        <div styleName='label__details'>
+          <div styleName='details'>
+            <div styleName='details__metadata'>
+              <ul styleName='metadata'>
+                {Object.entries(label.metadata).map(([key, value]) => (
+                  <li styleName='metadata__item'>
+                    <span styleName='metadata__item__key'>
+                      {inflect.titleize(key)}
+                    </span>
+                    <span styleName='metadata__item__value'>
+                      {value}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div styleName='details__footer'>
+              <div styleName='footer'>
+                <div styleName='footer__date'>
+                  <span styleName='footer__date__month'>
+                    {months.abbr[date.getMonth()]}
+                  </span>
+                  <span styleName='footer__date__date'>
+                    {date.getDate()}
+                  </span>
+                </div>
+                <div styleName='footer__barcode'>
+                  <div styleName='footer__barcode__svg'>
+                    <Barcode
+                      displayValue={false}
+                      fontSize={0}
+                      format='UPC'
+                      height={22}
+                      margin={0}
+                      textMargin={0}
+                      value={label.upc.toString()}
+                      width={1}
+                    />
+                  </div>
+                  <span styleName='footer__barcode__value'>
+                    {label.upc.toString().substr(0, 1) + ' '}
+                    {label.upc.toString().substr(1, 5) + ' '}
+                    {label.upc.toString().substr(6, 5) + ' '}
+                    {label.upc.toString().substr(-1)}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </li>
@@ -86,14 +104,14 @@ const MasterPack = ({
   )
 }
 
-MasterPack.handlePrint = () => {
+MasterPackHorizontal.handlePrint = () => {
   const { webContents } = BrowserWindow.getAllWindows()[0]
 
   webContents.printToPDF({
     marginsType: 1,
     pageSize: {
-      height: 101600,
-      width: 53975
+      height: 53975,
+      width: 101600
     },
     printBackground: true
   }, (printToPDFError, data) => {
@@ -112,4 +130,4 @@ MasterPack.handlePrint = () => {
   })
 }
 
-export default CSSModules(MasterPack, styles)
+export default CSSModules(MasterPackHorizontal, styles)
