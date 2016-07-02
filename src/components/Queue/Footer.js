@@ -43,6 +43,7 @@ const Footer = ({
   return (
     <Container
       className={className}
+      shadow={false}
       slim
     >
       <Button

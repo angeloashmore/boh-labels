@@ -1,11 +1,15 @@
+import Electron from 'electron'
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
+import Infinite from 'react-infinite'
 
 import { Container, Icon, QueueItem } from 'components'
 import { TextField } from 'components/form'
 
 import styles from 'components/Queue/Items.css'
+
+const { BrowserWindow } = Electron.remote
 
 const Items = ({
   className: overrideClassName,
@@ -38,7 +42,11 @@ const Items = ({
   ]
 
   return (
-    <Container className={className}>
+    <Infinite
+      containerHeight={BrowserWindow.getAllWindows()[0].getSize()[1] - 91}
+      elementHeight={60}
+      className={className}
+    >
       {items.map((quantity, id) => {
         const { category, key, metadata } = labels.get(id)
         return (
@@ -52,7 +60,7 @@ const Items = ({
           />
         )
       })}
-    </Container>
+    </Infinite>
   )
 }
 
