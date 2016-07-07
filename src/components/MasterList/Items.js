@@ -55,6 +55,7 @@ const Items = ({
           accessoriesRight={accessoriesRight(id)}
           category={category}
           metadata={metadata}
+          onDoubleClick={() => addQueueItem(id)}
           title={key}
         />
       ))}

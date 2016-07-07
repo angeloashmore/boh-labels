@@ -7,6 +7,7 @@ import styles from 'components/QueueItem/Details.css'
 const Accessories = ({
   className: overrideClassName,
   metadata = [],
+  onDoubleClick = () => {},
   title
 }) => {
   const className = cx(styles.base, {
@@ -27,7 +28,10 @@ const Accessories = ({
   )
 
   return (
-    <div className={className}>
+    <div
+      className={className}
+      onDoubleClick={onDoubleClick}
+    >
       <div styleName='title'>{title}</div>
       {renderMetadata}
     </div>

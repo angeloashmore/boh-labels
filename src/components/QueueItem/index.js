@@ -15,7 +15,8 @@ const QueueItem = ({
   className: overrideClassName,
   selected = false,
   title,
-  metadata = {}
+  metadata = {},
+  onDoubleClick = () => {}
 }) => {
   const className = cx(styles.base, {
     [styles['base--selected']]: selected,
@@ -41,6 +42,7 @@ const QueueItem = ({
       <Details
         title={title}
         metadata={flatMetadata}
+        onDoubleClick={onDoubleClick}
       />
       <Accessories
         accessories={accessoriesRight}
