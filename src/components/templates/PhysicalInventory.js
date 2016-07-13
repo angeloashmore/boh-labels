@@ -21,10 +21,24 @@ const PhysicalInventory = ({
     [overrideClassName]: overrideClassName
   })
 
+  const masterPackQuantity = ({ category }) => {
+    let quantity = 1
+
+    if (category.match(/iPhone/)) {
+      quantity = 10
+    } else if (category.match(/iPad/)) {
+      quantity = 5
+    } else if (category.match(/(iPod|Apple TV)/)) {
+      quantity = 6
+    } else if (category.match(/Watch/)) {
+      quantity = 4
+    }
+
+    return quantity
+  }
+
   const renderLabel = (quantity, id) => {
     const label = labels.items.get(id)
-
-    const masterPackQuantity = label.masterPackQuantity ? label.masterPackQuantity : 1
 
     return Immutable.Range(0, quantity).map(() => (
       <li styleName='label'>
@@ -37,7 +51,7 @@ const PhysicalInventory = ({
           <div styleName='label__details__upc'>{label.upc}</div>
         </div>
         <ul styleName='label__barcodes'>
-          {Immutable.Range(0, masterPackQuantity).map((i) => (
+          {Immutable.Range(0, masterPackQuantity(label)).map((i) => (
             <li styleName='label__barcodes__item'>
               <span styleName='label__barcodes__item__index'>{i + 1}</span>
               <div styleName='label__barcodes__item__barcode'>
@@ -73,7 +87,7 @@ PhysicalInventory.handlePrint = () => {
     marginsType: 1,
     pageSize: {
       height: 101600,
-      width: 53975
+      width: 57150
     },
     printBackground: true
   }, (printToPDFError, data) => {

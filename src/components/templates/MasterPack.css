@@ -8,14 +8,14 @@
 .label {
   align-items: stretch;
   display: flex;
-  height: 2.125in;
-  padding: 0.125in 0.125in 0.125in 0.25in;
+  height: 2.25in;
+  padding: 0.125in 0.125in 0.125in 0.125in;
   width: 4in;
 
   &__stamp {
     flex-shrink: 0;
     margin-right: 0.125in;
-    width: 2.25in;
+    width: 2.5in;
   }
 
   &__details {
@@ -30,7 +30,7 @@
   color: #fff;
   display: flex;
   flex-direction: column;
-  font-weight: 600;
+  font-weight: 500;
   height: 100%;
   justify-content: space-between;
   padding: 0.125in 0;
@@ -44,7 +44,7 @@
   }
 
   &__identifier {
-    font-size: 100px;
+    font-size: 110px;
     line-height: 100%;
   }
 }

@@ -110,7 +110,7 @@ MasterPackHorizontal.handlePrint = () => {
   webContents.printToPDF({
     marginsType: 1,
     pageSize: {
-      height: 53975,
+      height: 57150,
       width: 101600
     },
     printBackground: true
