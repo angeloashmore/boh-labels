@@ -28,3 +28,11 @@
     display: flex;
   }
 }
+
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  .queue {
+    box-shadow: -0.5px 0 0 rgba(0, 0, 0, 0.15);
+  }
+}

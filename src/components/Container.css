@@ -18,3 +18,11 @@
 .slim {
   padding: 10px 15px;
 }
+
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  .shadow {
+    box-shadow: inset 0 -0.5px 0 rgba(0, 0, 0, 0.15);
+  }
+}
