@@ -14,7 +14,7 @@ import styles from 'components/templates/MasterPack.css'
 const inflect = Inflect()
 const { BrowserWindow } = Electron.remote
 
-const MasterPackHorizontal = ({
+const MasterPack = ({
   className: overrideClassName,
   labels,
   printOptions,
@@ -30,68 +30,27 @@ const MasterPackHorizontal = ({
 
     return Immutable.Range(0, quantity).map(() => (
       <li styleName='label'>
-        <div styleName='label__stamp'>
-          <div styleName='stamp'>
-            <span styleName='stamp__category'>
-              {label.category}
-            </span>
-            <span styleName='stamp__identifier'>
-              {label.key.substr(2, 3)}
-            </span>
-            <span styleName='stamp__part-number'>
-              {label.key}
-            </span>
-          </div>
+        <div styleName='label__top'>
+          <span styleName='label__top__category'>{label.category}</span>
+          <Barcode
+            displayValue={false}
+            fontSize={0}
+            format='UPC'
+            height={18}
+            margin={0}
+            textMargin={0}
+            value={label.upc.toString()}
+            width={1}
+          />
         </div>
-        <div styleName='label__details'>
-          <div styleName='details'>
-            <div styleName='details__metadata'>
-              <ul styleName='metadata'>
-                {Object.entries(label.metadata).map(([key, value]) => (
-                  <li styleName='metadata__item'>
-                    <span styleName='metadata__item__key'>
-                      {inflect.titleize(key)}
-                    </span>
-                    <span styleName='metadata__item__value'>
-                      {value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div styleName='details__footer'>
-              <div styleName='footer'>
-                <div styleName='footer__date'>
-                  <span styleName='footer__date__month'>
-                    {months.abbr[date.getMonth()]}
-                  </span>
-                  <span styleName='footer__date__date'>
-                    {date.getDate()}
-                  </span>
-                </div>
-                <div styleName='footer__barcode'>
-                  <div styleName='footer__barcode__svg'>
-                    <Barcode
-                      displayValue={false}
-                      fontSize={0}
-                      format='UPC'
-                      height={22}
-                      margin={0}
-                      textMargin={0}
-                      value={label.upc.toString()}
-                      width={1}
-                    />
-                  </div>
-                  <span styleName='footer__barcode__value'>
-                    {label.upc.toString().substr(0, 1) + ' '}
-                    {label.upc.toString().substr(1, 5) + ' '}
-                    {label.upc.toString().substr(6, 5) + ' '}
-                    {label.upc.toString().substr(-1)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div styleName='label__key'>{label.key.substr(2, 3)}</div>
+        <div styleName='label__bottom'>
+          <span styleName='label__bottom__metadata'>
+            {Object.values(label.metadata).join(', ')}
+          </span>
+          <span styleName='label__bottom__date'>
+            {months.abbr[date.getMonth()]} {date.getDate()}
+          </span>
         </div>
       </li>
     ))
@@ -104,7 +63,7 @@ const MasterPackHorizontal = ({
   )
 }
 
-MasterPackHorizontal.handlePrint = () => {
+MasterPack.handlePrint = () => {
   const { webContents } = BrowserWindow.getAllWindows()[0]
 
   webContents.printToPDF({
@@ -130,4 +89,4 @@ MasterPackHorizontal.handlePrint = () => {
   })
 }
 
-export default CSSModules(MasterPackHorizontal, styles)
+export default CSSModules(MasterPack, styles)

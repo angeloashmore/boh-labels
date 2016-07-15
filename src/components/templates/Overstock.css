@@ -1,0 +1,93 @@
+.base {
+  font-family: system, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Lucida Grande';
+  font-size: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.label {
+  height: 4in;
+  position: relative;
+  width: 2.25in;
+
+  &__top {
+    border-bottom: 1px solid #c0c0c0;
+    height: 1.5in;
+    padding: 0.125in 0.125in 0.25in 0.125in;
+  }
+
+  &__bar {
+    background-color: #000;
+    height: 0.25in;
+    position: absolute;
+    margin: 0 0.125in;
+    top: 1.375in;
+    width: 2in;
+  }
+
+  &__bottom {
+    height: 2.5in;
+    padding: 0.25in 0.125in 0.125in 0.125in;
+  }
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+
+  &__key {
+    font-size: 70px;
+    line-height: 0;
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__key {
+    font-size: 70px;
+    line-height: 80%;
+    margin-top: 0.0625in;
+  }
+
+  &__metadata {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.metadata {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    margin-bottom: 0.0625in;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__key {
+      font-size: 11px;
+    }
+  }
+}

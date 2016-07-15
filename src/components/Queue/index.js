@@ -33,6 +33,7 @@ const Queue = ({
       <PrintOptions
         setTemplate={printOptionsActions.setTemplate}
         template={printOptions.template}
+        templates={templates}
       />
       <Items
         changeQuantity={queueActions.changeQuantity}

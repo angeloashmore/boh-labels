@@ -26,7 +26,7 @@ const PhysicalInventory = ({
 
     if (category.match(/iPhone/)) {
       quantity = 10
-    } else if (category.match(/iPad/)) {
+    } else if (category.match(/iPad/) && !category.match(/12\.9/)) {
       quantity = 5
     } else if (category.match(/(iPod|Apple TV)/)) {
       quantity = 6
@@ -42,32 +42,36 @@ const PhysicalInventory = ({
 
     return Immutable.Range(0, quantity).map(() => (
       <li styleName='label'>
+        <div styleName='label__top'>
+          <span styleName='label__top__key'>{label.key.substr(2, 3)}</span>
+          <ul styleName='label__top__details'>
+            <li>{label.key}</li>
+            <li>{label.upc}</li>
+          </ul>
+        </div>
         <div styleName='label__details'>
-          <div styleName='label__details__key'>{label.key}</div>
           <div styleName='label__details__category'>{label.category}</div>
-          <div styleName='label__details__metadata'>
+          <div>
             {Object.values(label.metadata).join(', ')}
           </div>
-          <div styleName='label__details__upc'>{label.upc}</div>
         </div>
         <ul styleName='label__barcodes'>
-          {Immutable.Range(0, masterPackQuantity(label)).map((i) => (
-            <li styleName='label__barcodes__item'>
-              <span styleName='label__barcodes__item__index'>{i + 1}</span>
-              <div styleName='label__barcodes__item__barcode'>
-                <Barcode
-                  displayValue={false}
-                  fontSize={0}
-                  format='UPC'
-                  height={11}
-                  margin={0}
-                  textMargin={0}
-                  value={label.upc.toString()}
-                  width={1}
-                />
-              </div>
-            </li>
-          ))}
+          {Immutable.Range(0, masterPackQuantity(label)).map((count) => (
+             <li styleName='label__barcodes__item'>
+               <span>{count + 1}</span>
+               <Barcode
+                 displayValue={false}
+                 fontSize={0}
+                 format='UPC'
+                 height={12}
+                 margin={0}
+                 textMargin={0}
+                 value={label.upc.toString()}
+                 width={1}
+               />
+               <span>{count + 1}</span>
+             </li>
+           ))}
         </ul>
       </li>
     ))
