@@ -30,27 +30,51 @@ const MasterPack = ({
 
     return Immutable.Range(0, quantity).map(() => (
       <li styleName='label'>
-        <div styleName='label__top'>
-          <span styleName='label__top__category'>{label.category}</span>
-          <Barcode
-            displayValue={false}
-            fontSize={0}
-            format='UPC'
-            height={18}
-            margin={0}
-            textMargin={0}
-            value={label.upc.toString()}
-            width={1}
-          />
+        <div styleName='label__header'>
+          <div styleName='header'>
+            <span styleName='header__category'>{label.category}</span>
+            <span>{months.abbr[date.getMonth()]} {date.getDate()}</span>
+          </div>
         </div>
-        <div styleName='label__key'>{label.key.substr(2, 3)}</div>
-        <div styleName='label__bottom'>
-          <span styleName='label__bottom__metadata'>
-            {Object.values(label.metadata).join(', ')}
-          </span>
-          <span styleName='label__bottom__date'>
-            {months.abbr[date.getMonth()]} {date.getDate()}
-          </span>
+        <div styleName='label__body'>
+          <div styleName='body'>
+            <div styleName='body__details'>
+              <ul styleName='body__details__metadata'>
+                {Object.values(label.metadata).map((item) => (
+                   <li styleName='body__details__metadata__item'>{item}</li>
+                 ))}
+              </ul>
+              <table styleName='body__details__technical'>
+                <tbody>
+                  <tr>
+                    <th>P/N</th>
+                    <td>{label.key}</td>
+                  </tr>
+                  <tr>
+                    <th>UPC</th>
+                    <td>
+                      {label.upc.toString().substr(0, 4) + ' '}
+                      {label.upc.toString().substr(4, 4) + ' '}
+                      {label.upc.toString().substr(8)}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <Barcode
+                displayValue={false}
+                fontSize={0}
+                format='UPC'
+                height={18}
+                margin={0}
+                textMargin={0}
+                value={label.upc.toString()}
+                width={1}
+              />
+            </div>
+            <div styleName='body__key'>
+              <span styleName='body__key__value'>{label.key.substr(2, 3)}</span>
+            </div>
+          </div>
         </div>
       </li>
     ))

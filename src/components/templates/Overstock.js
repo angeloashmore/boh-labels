@@ -32,8 +32,14 @@ const Overstock = ({
       <li styleName='label'>
         <div styleName='label__top'>
           <div styleName='top'>
-            <span>{label.category}</span>
-            <span styleName='top__key'>{label.key.substr(2, 3)}</span>
+            <div styleName='top__category'>
+              <span styleName='category'>{label.category}</span>
+            </div>
+            <div styleName='top__key'>
+              <div styleName='key'>
+                <span styleName='key__value'>{label.key.substr(2, 3)}</span>
+              </div>
+            </div>
             <div styleName='top__footer'>
               <Barcode
                 displayValue={false}
@@ -45,27 +51,27 @@ const Overstock = ({
                 value={label.upc.toString()}
                 width={1}
               />
-              <span>{months.abbr[date.getMonth()]} {date.getDate()}</span>
+              <span>
+                {months.abbr[date.getMonth()]} {date.getDate()}
+              </span>
             </div>
           </div>
         </div>
-        <div styleName='label__bar'></div>
         <div styleName='label__bottom'>
           <div styleName='bottom'>
-            <span>{label.category}</span>
-            <span styleName='bottom__key'>{label.key.substr(2, 3)}</span>
-            <div styleName='bottom__metadata'>
-              <ul styleName='metadata'>
-                {Object.entries(label.metadata).map(([key, value]) => (
-                   <li styleName='metadata__item'>
-                     <div styleName='metadata__item__key'>
-                       {inflect.titleize(key)}
-                     </div>
-                     <div>{value}</div>
-                   </li>
-                 ))}
-              </ul>
+            <div styleName='bottom__category'>
+              <span styleName='category'>{label.category}</span>
             </div>
+            <div styleName='bottom__key'>
+              <div styleName='key'>
+                <span styleName='key__value'>{label.key.substr(2, 3)}</span>
+              </div>
+            </div>
+            <ul styleName='bottom__metadata'>
+              {Object.values(label.metadata).map((item) => (
+                 <li styleName='bottom__metadata__item'>{item}</li>
+               ))}
+            </ul>
             <div styleName='bottom__footer'>
               <Barcode
                 displayValue={false}
@@ -77,7 +83,9 @@ const Overstock = ({
                 value={label.upc.toString()}
                 width={1}
               />
-              <span>{months.abbr[date.getMonth()]} {date.getDate()}</span>
+              <span>
+                {months.abbr[date.getMonth()]} {date.getDate()}
+              </span>
             </div>
           </div>
         </div>

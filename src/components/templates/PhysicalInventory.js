@@ -39,26 +39,24 @@ const PhysicalInventory = ({
 
   const renderLabel = (quantity, id) => {
     const label = labels.items.get(id)
+    const mpQuantity = masterPackQuantity(label)
 
     return Immutable.Range(0, quantity).map(() => (
       <li styleName='label'>
-        <div styleName='label__top'>
-          <span styleName='label__top__key'>{label.key.substr(2, 3)}</span>
-          <ul styleName='label__top__details'>
-            <li>{label.key}</li>
-            <li>{label.upc}</li>
-          </ul>
-        </div>
+        <div styleName='label__key'>{label.key}</div>
         <div styleName='label__details'>
-          <div styleName='label__details__category'>{label.category}</div>
-          <div>
+          <div styleName='label__details__item'>{label.category}</div>
+          <div styleName='label__details__item'>
             {Object.values(label.metadata).join(', ')}
           </div>
         </div>
-        <ul styleName='label__barcodes'>
-          {Immutable.Range(0, masterPackQuantity(label)).map((count) => (
+        <div styleName='label__quantity'>
+          {mpQuantity + ' '}
+          unit{mpQuantity === 1 ? '' : 's'} per pack
+        </div>
+        <ol styleName='label__barcodes'>
+          {Immutable.Range(0, mpQuantity).map((count) => (
              <li styleName='label__barcodes__item'>
-               <span>{count + 1}</span>
                <Barcode
                  displayValue={false}
                  fontSize={0}
@@ -69,10 +67,14 @@ const PhysicalInventory = ({
                  value={label.upc.toString()}
                  width={1}
                />
-               <span>{count + 1}</span>
              </li>
            ))}
-        </ul>
+        </ol>
+        <div>
+          {label.upc.toString().substr(0, 4) + ' '}
+          {label.upc.toString().substr(4, 4) + ' '}
+          {label.upc.toString().substr(8)}
+        </div>
       </li>
     ))
   }

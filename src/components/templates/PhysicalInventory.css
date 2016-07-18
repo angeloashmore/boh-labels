@@ -1,59 +1,57 @@
 .base {
-  font-family: system, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Lucida Grande';
-  font-size: 11px;
+  font-family: 'Myriad Set', 'Myriad Set Pro', Myriad, 'Heveltica Neue', Helvetica, sans-serif;
+  font-size: 13px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .label {
-  align-items: stretch;
+  align-items: center;
   display: flex;
   flex-direction: column;
   height: 4in;
   justify-content: space-between;
-  padding: 0.1875in 0.125in;
+  padding: 0.125in;
   width: 2.25in;
 
-  &__top {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    letter-spacing: 0.5px;
-
-    &__key {
-      font-size: 32px;
-      font-weight: 500;
-      line-height: 0;
-    }
-
-    &__details {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      text-align: right;
-    }
+  &__key {
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 0.125in;
   }
 
   &__details {
-    display: block;
+    margin-bottom: 0.125in;
+    text-align: center;
 
-    &__category {
-      font-size: 16px;
+    &__item {
+      margin-bottom: 2px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
+  &__quantity {
+    font-weight: 600;
+    margin-bottom: 0.125in;
+  }
+
   &__barcodes {
-    list-style: none;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    list-style: decimal;
+    justify-content: center;
+    margin: 0 0 0.125in 0;
     padding: 0;
-    height: 2.5in;
 
     &__item {
-      align-items: center;
-      display: flex;
-      justify-content: space-around;
+      line-height: 0;
       margin-bottom: 0.125in;
+      padding: 0 0.125in;
 
       &:last-child {
         margin-bottom: 0;

@@ -1,93 +1,126 @@
 .base {
-  font-family: system, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Lucida Grande';
-  font-size: 16px;
+  font-family: 'Myriad Set', 'Myriad Set Pro', Myriad, 'Heveltica Neue', Helvetica, sans-serif;
+  font-size: 21px;
+  font-weight: 400;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .label {
+  display: flex;
+  flex-direction: column;
   height: 4in;
-  position: relative;
   width: 2.25in;
 
   &__top {
-    border-bottom: 1px solid #c0c0c0;
+    border-bottom: 1px solid #7f7f7f;
+    display: flex;
     height: 1.5in;
-    padding: 0.125in 0.125in 0.25in 0.125in;
-  }
-
-  &__bar {
-    background-color: #000;
-    height: 0.25in;
-    position: absolute;
-    margin: 0 0.125in;
-    top: 1.375in;
-    width: 2in;
+    padding: 0.125in;
   }
 
   &__bottom {
-    height: 2.5in;
-    padding: 0.25in 0.125in 0.125in 0.125in;
+    display: flex;
+    flex-grow: 1;
+    padding: 0.125in;
+  }
+}
+
+.category {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.key {
+  align-items: center;
+  background-color: #000;
+  border-radius: 0.04in;
+  color: #fff;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  text-align: center;
+
+  &__value {
+    font-size: 80px;
+    font-weight: 300;
+    line-height: 0;
+    position: relative;
+    top: 0.04in;
   }
 }
 
 .top {
+  align-items: stretch;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  justify-content: space-between;
+  flex-grow: 1;
+  font-size: 18px;
+  font-weight: 500;
+
+  &__category {
+    margin-bottom: 0.0625in;
+  }
 
   &__key {
-    font-size: 70px;
-    line-height: 0;
+    align-items: stretch;
+    display: flex;
+    flex-grow: 1;
+    justify-content: stretch;
   }
 
   &__footer {
     align-items: center;
     display: flex;
+    font-size: 14px;
     justify-content: space-between;
+    margin-top: 0.0625in;
   }
 }
 
 .bottom {
+  align-items: stretch;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
+  font-size: 18px;
+  font-weight: 400;
+
+  &__category {
+    margin-bottom: 0.125in;
+  }
 
   &__key {
-    font-size: 70px;
-    line-height: 80%;
-    margin-top: 0.0625in;
+    align-items: stretch;
+    display: flex;
+    height: 0.75in;
+    justify-content: stretch;
+    margin-bottom: 0.125in;
   }
 
   &__metadata {
-    align-items: center;
     display: flex;
     flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &__item {
+      margin-bottom: 0.0625in;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &__footer {
     align-items: center;
     display: flex;
     justify-content: space-between;
-  }
-}
-
-.metadata {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  &__item {
-    margin-bottom: 0.0625in;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &__key {
-      font-size: 11px;
-    }
+    margin-top: 0.125in;
   }
 }
