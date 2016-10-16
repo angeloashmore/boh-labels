@@ -34,7 +34,7 @@
 
 .label {
   display: flex;
-  height: 1in;
+  height: 0.95in;
   page-break-inside: avoid;
 
   &:nth-child(10),
@@ -105,7 +105,7 @@
       max-width: none;
       position: absolute;
       transform: rotate(90deg);
-      top: 34px;
+      top: 31px;
       width: 76px;
 
       & > svg {
