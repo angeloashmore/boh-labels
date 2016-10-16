@@ -52,20 +52,22 @@ const Shelf = ({
             </ul>
           </div>
         </div>
-        <div styleName='label__barcode-wrapper'>
-          <div styleName='label__barcode-wrapper__barcode'>
-            <Barcode
-              displayValue={false}
-              fontSize={0}
-              format='UPC'
-              height={34}
-              margin={0}
-              textMargin={0}
-              value={label.upc.toString()}
-              width={1}
-            />
+        {label.upc && (
+          <div styleName='label__barcode-wrapper'>
+            <div styleName='label__barcode-wrapper__barcode'>
+              <Barcode
+                displayValue={false}
+                fontSize={0}
+                format='UPC'
+                height={34}
+                margin={0}
+                textMargin={0}
+                value={label.upc.toString()}
+                width={1}
+              />
+            </div>
           </div>
-        </div>
+         )}
       </li>
     ))
   }
