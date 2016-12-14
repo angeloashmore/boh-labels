@@ -37,12 +37,12 @@
   height: 0.95in;
   page-break-inside: avoid;
 
-  &:nth-child(10),
+  &:nth-child(10n),
   &:last-child {
     border-bottom: 1px solid #cccccc;
   }
 
-  &:nth-child(10) {
+  &:nth-child(10n) {
     page-break-after: always;
   }
 
