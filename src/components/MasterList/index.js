@@ -25,21 +25,37 @@ const MasterList = ({
   const filteredLabels = (function () {
     const { collection: collectionId, query } = filters
 
-    const collection = collections.items.get(collectionId);
+    const collection = collections.items.get(collectionId)
+    const needles = query.toLowerCase().trim().split(' ')
 
-    return labels.items.filter((item) => {
-      let result = true
+    const queryIsEventuallyUPC = needles.length === 1 &&
+                                 needles[0].length > 3 &&
+                                 Number.parseInt(needles[0])
 
-      if (collection) {
-        result = result && collection.label_ids.includes(item.id)
+    if (queryIsEventuallyUPC) {
+      if (needles[0].length == 12) {
+        return labels.items.filter((item) => item.upc == needles[0])
+      } else {
+        return labels.items.constructor()
       }
+    }
 
-      if (query.trim().length > 0) {
-        result = result && fuzzySearch(item, query)
-      }
+    let result = labels.items
 
-      return result
-    })
+    if (collection) {
+      result = result.filter((item) => collection.label_ids.includes(item.id))
+    }
+
+    if (needles[0].length > 0) {
+      result = result.filter((item) => {
+        const subject = { ...item, id: undefined, upc: undefined }
+        const haystack = JSON.stringify(subject).toLowerCase()
+
+        return needles.every((needle) => haystack.indexOf(needle) > 0)
+      })
+    }
+
+    return result
   })()
 
   return (
