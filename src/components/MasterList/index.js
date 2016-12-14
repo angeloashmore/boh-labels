@@ -25,9 +25,7 @@ const MasterList = ({
   const filteredLabels = (function () {
     const { collection: collectionId, query } = filters
 
-    const collection = collections.items.find((value, key) => {
-      return key === collectionId
-    })
+    const collection = collections.items.get(collectionId);
 
     return labels.items.filter((item) => {
       let result = true
