@@ -7,11 +7,11 @@ import Barcode from 'react-barcode'
 import temp from 'temp'
 import fs from 'fs'
 
-import styles from 'components/templates/PhysicalInventory.css'
+import styles from 'components/templates/MasterPackThin.css'
 
 const { BrowserWindow } = Electron.remote
 
-const PhysicalInventory = ({
+const MasterPackThin = ({
   className: overrideClassName,
   labels,
   printOptions,
@@ -47,37 +47,46 @@ const PhysicalInventory = ({
 
     return Immutable.Range(0, quantity).map(() => (
       <li styleName='label'>
-        <div styleName='label__key'>{label.key}</div>
-        <div styleName='label__details'>
-          <div styleName='label__details__item'>{label.category}</div>
-          <div styleName='label__details__item'>
-            {Object.values(label.metadata).join(', ')}
+        <div styleName='label__top'>
+          <div styleName='top'>
+            <div styleName='top__key'>
+              <div styleName='key'>
+                <span styleName='key__value'>{label.key.substr(2, 3)}</span>
+              </div>
+            </div>
+            <div styleName='top__details'>
+              <span styleName='top__details__category'>{label.category}</span>
+              <ul styleName='top__details__metadata'>
+                {Object.values(label.metadata).map((item) => (
+                  <li styleName='top__details__metadata__item'>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div styleName='top__barcode'>
+              <Barcode
+                displayValue={false}
+                fontSize={0}
+                format='UPC'
+                height={12}
+                margin={0}
+                textMargin={0}
+                value={label.upc.toString()}
+                width={1}
+              />
+              <table styleName='top__barcode__technical'>
+                <tbody>
+                  <tr>
+                    <th>P/N</th>
+                    <td>{label.key}</td>
+                  </tr>
+                  <tr>
+                    <th>Qty</th>
+                    <td>{mpQuantity}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-        <div styleName='label__quantity'>
-          {mpQuantity + ' '}
-          unit{mpQuantity === 1 ? '' : 's'} per pack
-        </div>
-        <ol styleName='label__barcodes'>
-          {Immutable.Range(0, mpQuantity).map((count) => (
-             <li styleName='label__barcodes__item'>
-               <Barcode
-                 displayValue={false}
-                 fontSize={0}
-                 format='UPC'
-                 height={12}
-                 margin={0}
-                 textMargin={0}
-                 value={label.upc.toString()}
-                 width={1}
-               />
-             </li>
-           ))}
-        </ol>
-        <div>
-          {label.upc.toString().substr(0, 4) + ' '}
-          {label.upc.toString().substr(4, 4) + ' '}
-          {label.upc.toString().substr(8)}
         </div>
       </li>
     ))
@@ -90,21 +99,21 @@ const PhysicalInventory = ({
   )
 }
 
-PhysicalInventory.handlePrint = () => {
+MasterPackThin.handlePrint = () => {
   const { webContents } = BrowserWindow.getAllWindows()[0]
 
   webContents.printToPDF({
     marginsType: 1,
     pageSize: {
-      height: 101600,
-      width: 57150
+      height: 57150,
+      width: 101600
     },
     printBackground: true
   }, (printToPDFError, data) => {
     if (printToPDFError) throw printToPDFError
 
     const tempPath = temp.path({
-      prefix: 'boh-labels__physical-inventory__',
+      prefix: 'boh-labels__master-pack__',
       suffix: '.pdf'
     })
 
@@ -116,4 +125,4 @@ PhysicalInventory.handlePrint = () => {
   })
 }
 
-export default CSSModules(PhysicalInventory, styles)
+export default CSSModules(MasterPackThin, styles)

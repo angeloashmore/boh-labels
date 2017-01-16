@@ -9,7 +9,7 @@ import {
 
 import styles from 'components/App.css'
 
-export default class App extends Component {
+class App extends Component {
   static propTypes = {
     loadCollections: PropTypes.func.isRequired,
     loadLabels: PropTypes.func.isRequired

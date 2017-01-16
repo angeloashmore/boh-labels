@@ -1,0 +1,102 @@
+.base {
+  font-family: 'Myriad Set', 'Myriad Set Pro', Myriad, 'Heveltica Neue', Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  height: 2.25in;
+  width: 4in;
+
+  &__top {
+    border-bottom: 1px solid #7f7f7f;
+    display: flex;
+    height: 0.75in;
+    padding: 0.125in;
+  }
+}
+
+.top {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+
+  &__key {
+    margin-right: 0.125in;
+    width: 0.85in;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 0.125in;
+
+    &__category {
+      font-weight: 600;
+    }
+
+    &__metadata {
+      display: block;
+      margin: 0;
+      padding: 0;
+
+      &__item {
+        display: block;
+      }
+    }
+  }
+
+  &__barcode {
+    display: block;
+    flex-shrink: 1;
+
+    &__technical {
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 11px;
+      margin-top: 0.03125in;
+      width: 100%;
+
+      tr {
+        &:last-child {
+          th,
+          td {
+            padding-bottom: 0;
+          }
+        }
+
+        th {
+          font-weight: 700;
+          padding: 0 0.0625in 2px 0;
+        }
+
+        td {
+          padding: 0 0 2px 0;
+        }
+      }
+    }
+  }
+}
+
+.key {
+  align-items: center;
+  background-color: #000;
+  border-radius: 0.04in;
+  color: #fff;
+  flex-grow: 1;
+  justify-content: center;
+  text-align: center;
+
+  &__value {
+    font-size: 42px;
+    font-weight: 300;
+    position: relative;
+    top: 0.02in;
+  }
+}

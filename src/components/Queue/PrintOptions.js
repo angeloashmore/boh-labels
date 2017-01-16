@@ -29,6 +29,7 @@ const PrintOptions = ({
           value={template}
         >
           <option value='MasterPack'>Master Pack</option>
+          <option value='MasterPackThin'>Master Pack Thin</option>
           <option value='Overstock'>Overstock</option>
           <option value='PhysicalInventory'>Physical Inventory</option>
           <option value='Shelf'>Shelf</option>
