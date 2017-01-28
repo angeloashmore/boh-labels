@@ -31,9 +31,9 @@ const MasterPackThin = ({
     } else if (category.match(/(iPod|Apple TV)/)) {
       quantity = 6
     } else if (category.match(/Watch Series 1/)) {
-      quantity = 4
-    } else if (category.match(/Watch Series 2/)) {
       quantity = 6
+    } else if (category.match(/Watch Series 2/)) {
+      quantity = 4
     } else if (category.match(/ScreenCare/)) {
       quantity = 10
     }
