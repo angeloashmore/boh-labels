@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import CSSModules from 'react-css-modules'
 
 import {
@@ -9,29 +9,12 @@ import {
 
 import styles from 'components/App.css'
 
-class App extends Component {
-  static propTypes = {
-    loadCollections: PropTypes.func.isRequired,
-    loadLabels: PropTypes.func.isRequired
-  }
-
-  componentDidMount () {
-    const { loadCollections, loadLabels } = this.props
-
-    // Populate store
-    loadCollections()
-    loadLabels()
-  }
-
-  render () {
-    return (
-      <div styleName='base'>
-        <MasterListContainer styleName='master-list' />
-        <QueueContainer styleName='queue' />
-        <PrintSheetContainer styleName='print-sheet' />
-      </div>
-    )
-  }
-}
+const App = () => (
+  <div styleName='base'>
+    <MasterListContainer styleName='master-list' />
+    <QueueContainer styleName='queue' />
+    <PrintSheetContainer styleName='print-sheet' />
+  </div>
+)
 
 export default CSSModules(App, styles)
