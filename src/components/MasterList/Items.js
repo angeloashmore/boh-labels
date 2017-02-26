@@ -20,11 +20,6 @@ const Items = ({
     [overrideClassName]: overrideClassName
   })
 
-  const handleAddQueueItem = (id) => {
-    addQueueItem(id);
-    document.querySelector('#search').select()
-  }
-
   const renderLoading = (
     <div styleName='loading'>
       Loading
@@ -41,7 +36,7 @@ const Items = ({
 
   const accessoriesRight = (id, selected = false) => ([
     <Icon
-      onClick={() => handleAddQueueItem(id)}
+      onClick={() => addQueueItem(id)}
       selected={selected}
       type='add'
     />
@@ -60,7 +55,7 @@ const Items = ({
           accessoriesRight={accessoriesRight(id)}
           category={category}
           metadata={metadata}
-          onDoubleClick={() => handleAddQueueItem(id)}
+          onDoubleClick={() => addQueueItem(id)}
           title={key}
         />
       ))}

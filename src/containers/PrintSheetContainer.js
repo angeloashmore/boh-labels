@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { PrintSheet } from 'components'
+import PrintSheet from 'components/PrintSheet'
 
 const mapStateToProps = (state) => ({
   labels: state.labels,

@@ -1,51 +1,37 @@
-import typeToReducer from 'type-to-reducer'
-import { createAction } from 'redux-actions'
-import Immutable from 'immutable'
+import { handleActions } from 'redux-actions'
+import { OrderedMap } from 'immutable'
 
-const LOAD = 'boh-labels/collections/LOAD'
+export const LOAD_PENDING = 'boh-labels/collections/LOAD_PENDING'
+export const LOAD_FULFILLED = 'boh-labels/collections/LOAD_FULFILLED'
+export const LOAD_REJECTED = 'boh-labels/collections/LOAD_REJECTED'
 
 const initialState = {
   error: null,
   isPending: false,
   isRejected: false,
-  items: Immutable.OrderedMap()
+  items: OrderedMap()
 }
 
-export default typeToReducer({
-  [LOAD]: {
-    PENDING: () => ({
+export default handleActions({
+  [LOAD_PENDING]: () => ({
+    ...initialState,
+    isPending: true
+  }),
+
+  [LOAD_FULFILLED]: (_state, { payload: collections }) => {
+    const keyValuePairs = collections.map((x) => [x.id, x])
+    const items = OrderedMap(keyValuePairs)
+
+    return {
       ...initialState,
-      isPending: true
-    }),
-
-    FULFILLED: (_state, { payload: collections }) => {
-      const keyValuePairs = collections.map((x) => [x.id, x])
-      const items = Immutable.OrderedMap(keyValuePairs)
-
-      return {
-        ...initialState,
-        items
-      }
-    },
-
-    REJECTED: ({ items }, { payload: error }) => ({
-      ...initialState,
-      error,
-      isRejected: true,
       items
-    })
-  }
+    }
+  },
+
+  [LOAD_REJECTED]: ({ items }, { payload: error }) => ({
+    ...initialState,
+    error,
+    isRejected: true,
+    items
+  })
 }, initialState)
-
-export const load = createAction(LOAD, async () => {
-  const releasesURL = 'https://api.github.com/repos/angeloashmore/boh-labels-db/releases/latest'
-  const releasesData = await fetch(releasesURL)
-  const releases = await releasesData.json()
-
-  const asset = releases.assets.find((asset) => asset.name === 'collections.json')
-
-  const result = await fetch(asset.browser_download_url)
-  const json = await result.json()
-
-  return json
-})
