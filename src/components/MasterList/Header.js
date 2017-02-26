@@ -20,6 +20,7 @@ const Header = ({
     <TopBar className={className}>
       <Icon type='search' styleName='search-icon' />
       <input
+        id='search'
         onKeyPress={({ key, target }) => {
           if (key === 'Enter') {
             if (labels.size > 0) {
