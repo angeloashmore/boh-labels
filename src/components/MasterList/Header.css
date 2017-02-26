@@ -1,4 +1,5 @@
 .base {
+  composes: base from '../TopBar.css';
   padding: 0;
 }
 

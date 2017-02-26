@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions'
 import { OrderedMap } from 'immutable'
 
-export const LOAD_PENDING = 'boh-labels/collections/LOAD'
+export const LOAD_PENDING = 'boh-labels/collections/LOAD_PENDING'
 export const LOAD_FULFILLED = 'boh-labels/collections/LOAD_FULFILLED'
 export const LOAD_REJECTED = 'boh-labels/collections/LOAD_REJECTED'
 

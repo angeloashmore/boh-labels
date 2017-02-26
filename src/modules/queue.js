@@ -2,11 +2,11 @@ import typeToReducer from 'type-to-reducer'
 import { createAction } from 'redux-actions'
 import Immutable from 'immutable'
 
-const ADD = 'boh-labels/queue/ADD'
-const ADD_MULTIPLE = 'boh-labels/queue/ADD_MULTIPLE'
-const REMOVE = 'boh-labels/queue/REMOVE'
-const REMOVE_ALL = 'boh-labels/queue/REMOVE_ALL'
-const CHANGE_QUANTITY = 'boh-labels/queue/CHANGE_QUANTITY'
+export const ADD = 'boh-labels/queue/ADD'
+export const ADD_MULTIPLE = 'boh-labels/queue/ADD_MULTIPLE'
+export const REMOVE = 'boh-labels/queue/REMOVE'
+export const REMOVE_ALL = 'boh-labels/queue/REMOVE_ALL'
+export const CHANGE_QUANTITY = 'boh-labels/queue/CHANGE_QUANTITY'
 
 const initialState = {
   items: Immutable.OrderedMap(),
