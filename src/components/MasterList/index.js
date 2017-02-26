@@ -2,7 +2,6 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import cx from 'classnames'
 
-import fuzzySearch from 'lib/fuzzySearch'
 import CollectionSelect from 'components/MasterList/CollectionSelect'
 import Footer from 'components/MasterList/Footer'
 import Header from 'components/MasterList/Header'
