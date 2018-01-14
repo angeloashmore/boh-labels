@@ -44,7 +44,7 @@ const Shelf = ({
               {label.key.match(/\/[A-Z]$/) ? label.key.substr(2, 3) : label.key}
             </div>
             <ul styleName='label__main__body__metadata'>
-              {Object.values(label.metadata).map((value) => (
+              {Object.values(label.metadata || {}).map((value) => (
                 <li styleName='label__main__body__metadata__item'>
                   {value}
                 </li>

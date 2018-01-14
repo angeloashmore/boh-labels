@@ -51,7 +51,7 @@ const PhysicalInventory = ({
         <div styleName='label__details'>
           <div styleName='label__details__item'>{label.category}</div>
           <div styleName='label__details__item'>
-            {Object.values(label.metadata).join(', ')}
+          {Object.values(label.metadata || {}).join(', ')}
           </div>
         </div>
         <div styleName='label__quantity'>
@@ -59,7 +59,7 @@ const PhysicalInventory = ({
           unit{mpQuantity === 1 ? '' : 's'} per pack
         </div>
         <ol styleName='label__barcodes'>
-          {Immutable.Range(0, mpQuantity).map((count) => (
+           {label.upc && (Immutable.Range(0, mpQuantity).map((count) => (
              <li styleName='label__barcodes__item'>
                <Barcode
                  displayValue={false}
@@ -72,13 +72,15 @@ const PhysicalInventory = ({
                  width={1}
                />
              </li>
-           ))}
+           )))}
         </ol>
-        <div>
-          {label.upc.toString().substr(0, 4) + ' '}
-          {label.upc.toString().substr(4, 4) + ' '}
-          {label.upc.toString().substr(8)}
-        </div>
+        {label.upc && (
+          <div>
+            {label.upc.toString().substr(0, 4) + ' '}
+            {label.upc.toString().substr(4, 4) + ' '}
+            {label.upc.toString().substr(8)}
+          </div>
+        )}
       </li>
     ))
   }

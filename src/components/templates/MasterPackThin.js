@@ -57,22 +57,24 @@ const MasterPackThin = ({
             <div styleName='top__details'>
               <span styleName='top__details__category'>{label.category}</span>
               <ul styleName='top__details__metadata'>
-                {Object.values(label.metadata).map((item) => (
+                {Object.values(label.metadata || {}).map((item) => (
                   <li styleName='top__details__metadata__item'>{item}</li>
                 ))}
               </ul>
             </div>
             <div styleName='top__barcode'>
-              <Barcode
-                displayValue={false}
-                fontSize={0}
-                format='UPC'
-                height={12}
-                margin={0}
-                textMargin={0}
-                value={label.upc.toString()}
-                width={1}
-              />
+              {label.upc && (
+                <Barcode
+                  displayValue={false}
+                  fontSize={0}
+                  format='UPC'
+                  height={12}
+                  margin={0}
+                  textMargin={0}
+                  value={label.upc.toString()}
+                  width={1}
+                />
+              )}
               <table styleName='top__barcode__technical'>
                 <tbody>
                   <tr>

@@ -40,7 +40,7 @@ const MasterPack = ({
           <div styleName='body'>
             <div styleName='body__details'>
               <ul styleName='body__details__metadata'>
-                {Object.values(label.metadata).map((item) => (
+                {Object.values(label.metadata || {}).map((item) => (
                    <li styleName='body__details__metadata__item'>{item}</li>
                  ))}
               </ul>
@@ -50,26 +50,30 @@ const MasterPack = ({
                     <th>P/N</th>
                     <td>{label.key}</td>
                   </tr>
-                  <tr>
-                    <th>UPC</th>
-                    <td>
-                      {label.upc.toString().substr(0, 4) + ' '}
-                      {label.upc.toString().substr(4, 4) + ' '}
-                      {label.upc.toString().substr(8)}
-                    </td>
-                  </tr>
+                  {label.upc && (
+                    <tr>
+                      <th>UPC</th>
+                      <td>
+                        {label.upc.toString().substr(0, 4) + ' '}
+                        {label.upc.toString().substr(4, 4) + ' '}
+                        {label.upc.toString().substr(8)}
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
-              <Barcode
-                displayValue={false}
-                fontSize={0}
-                format='UPC'
-                height={18}
-                margin={0}
-                textMargin={0}
-                value={label.upc.toString()}
-                width={1}
-              />
+              {label.upc && (
+                <Barcode
+                  displayValue={false}
+                  fontSize={0}
+                  format='UPC'
+                  height={18}
+                  margin={0}
+                  textMargin={0}
+                  value={label.upc.toString()}
+                  width={1}
+                />
+              )}
             </div>
             <div styleName='body__key'>
               <span styleName='body__key__value'>{label.key.substr(2, 3)}</span>

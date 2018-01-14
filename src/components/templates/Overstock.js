@@ -41,16 +41,18 @@ const Overstock = ({
               </div>
             </div>
             <div styleName='top__footer'>
-              <Barcode
-                displayValue={false}
-                fontSize={0}
-                format='UPC'
-                height={12}
-                margin={0}
-                textMargin={0}
-                value={label.upc.toString()}
-                width={1}
-              />
+              {label.upc && (
+                <Barcode
+                  displayValue={false}
+                  fontSize={0}
+                  format='UPC'
+                  height={12}
+                  margin={0}
+                  textMargin={0}
+                  value={label.upc.toString()}
+                  width={1}
+                />
+              )}
               <span>
                 {months.abbr[date.getMonth()]} {date.getDate()}
               </span>
@@ -68,21 +70,23 @@ const Overstock = ({
               </div>
             </div>
             <ul styleName='bottom__metadata'>
-              {Object.values(label.metadata).map((item) => (
+              {Object.values(label.metadata || {}).map((item) => (
                  <li styleName='bottom__metadata__item'>{item}</li>
                ))}
             </ul>
             <div styleName='bottom__footer'>
-              <Barcode
-                displayValue={false}
-                fontSize={0}
-                format='UPC'
-                height={12}
-                margin={0}
-                textMargin={0}
-                value={label.upc.toString()}
-                width={1}
-              />
+              {label.upc && (
+                <Barcode
+                  displayValue={false}
+                  fontSize={0}
+                  format='UPC'
+                  height={12}
+                  margin={0}
+                  textMargin={0}
+                  value={label.upc.toString()}
+                  width={1}
+                />
+              )}
               <span>
                 {months.abbr[date.getMonth()]} {date.getDate()}
               </span>
