@@ -32,7 +32,7 @@ const PhysicalInventory = ({
       quantity = 6
     } else if (category.match(/Watch Series 1/)) {
       quantity = 6
-    } else if (category.match(/((Watch Series 2)|(Watch Nike))/)) {
+    } else if (category.match(/Watch/)) {
       quantity = 4
     } else if (category.match(/ScreenCare/)) {
       quantity = 10
